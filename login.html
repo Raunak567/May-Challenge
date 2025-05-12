@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard with Auth Popups</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Custom animations */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        @keyframes slideUp {
+            from { transform: translateY(20px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+        
+        .animate-fade-in {
+            animation: fadeIn 0.3s ease-out forwards;
+        }
+        
+        .animate-slide-up {
+            animation: slideUp 0.4s ease-out forwards;
+        }
+        
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: #888;
+            border-radius: 4px;
+        }
+        
+        ::-webkit-scrollbar-thumb:hover {
+            background: #555;
+        }
+        
+        /* Custom checkbox */
+        .custom-checkbox {
+            appearance: none;
+            -webkit-appearance: none;
+            width: 20px;
+            height: 20px;
+            border: 2px solid #d1d5db;
+            border-radius: 4px;
+            outline: none;
+            cursor: pointer;
+            position: relative;
+        }
+        
+        .custom-checkbox:checked {
+            background-color: #3b82f6;
+            border-color: #3b82f6;
+        }
+        
+        .custom-checkbox:checked::after {
+            content: '\2713';
+            position: absolute;
+            color: white;
+            font-size: 14px;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+        }
+    </style>
+</head>
+<body class="bg-gray-100 font-sans">
+    <!-- Dashboard Layout -->
+    <div class="min-h-screen flex flex-col">
+        <!-- Navbar -->
+        <nav class="bg-white shadow-md">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex justify-between h-16">
+                    <div class="flex items-center">
+                        <div class="flex-shrink-0 flex items-center">
+                            <i class="fas fa-chart-line text-blue-500 text-2xl mr-2"></i>
+                            <span class="text-xl font-bold text-gray-800">AnalyticsPro</span>
+                        </div>
+                    </div>
+                    <div class="flex items-center space-x-4">
+                        <button id="login-btn" class="px-4 py-2 text-gray-600 hover:text-blue-500 transition-colors">
+                            Login
+                        </button>
+                        <button id="signup-btn" class="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 transition-colors">
+                            Sign Up
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Dashboard Content -->
+        <main class="flex-grow p-6">
+            <div class="max-w-7xl mx-auto">
+                <h1 class="text-3xl font-bold text-gray-800 mb-6">Dashboard Overview</h1>
+                
+                <!-- Stats Cards -->
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+                    <div class="bg-white p-6 rounded-lg shadow-md">
+                        <div class="flex items-center">
+                            <div class="p-3 rounded-full bg-blue-100 text-blue-500 mr-4">
+                                <i class="fas fa-users text-lg"></i>
+                            </div>
+                            <div>
+                                <p class="text-gray-500">Total Users</p>
+                                <h3 class="text-2xl font-bold">1,248</h3>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-white p-6 rounded-lg shadow-md">
+                        <div class="flex items-center">
+                            <div class="p-3 rounded-full bg-green-100 text-green-500 mr-4">
+                                <i class="fas fa-chart-bar text-lg"></i>
+                            </div>
+                            <div>
+                                <p class="text-gray-500">Revenue</p>
+                                <h3 class="text-2xl font-bold">$24,780</h3>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-white p-6 rounded-lg shadow-md">
+                        <div class="flex items-center">
+                            <div class="p-3 rounded-full bg-purple-100 text-purple-500 mr-4">
+                                <i class="fas fa-shopping-cart text-lg"></i>
+                            </div>
+                            <div>
+                                <p class="text-gray-500">Orders</p>
+                                <h3 class="text-2xl font-bold">356</h3>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-white p-6 rounded-lg shadow-md">
+                        <div class="flex items-center">
+                            <div class="p-3 rounded-full bg-yellow-100 text-yellow-500 mr-4">
+                                <i class="fas fa-clock text-lg"></i>
+                            </div>
+                            <div>
+                                <p class="text-gray-500">Avg. Session</p>
+                                <h3 class="text-2xl font-bold">4m 32s</h3>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Charts Section -->
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
+                    <div class="bg-white p-6 rounded-lg shadow-md lg:col-span-2">
+                        <div class="flex justify-between items-center mb-4">
+                            <h2 class="text-xl font-semibold text-gray-800">Sales Overview</h2>
+                            <div class="flex space-x-2">
+                                <button class="px-3 py-1 text-sm bg-blue-50 text-blue-500 rounded-md">Week</button>
+                                <button class="px-3 py-1 text-sm text-gray-500 hover:bg-gray-100 rounded-md">Month</button>
+                                <button class="px-3 py-1 text-sm text-gray-500 hover:bg-gray-100 rounded-md">Year</button>
+                            </div>
+                        </div>
+                        <div class="h-64 bg-gray-50 rounded-md flex items-center justify-center">
+                            <p class="text-gray-400">Chart would be displayed here</p>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-white p-6 rounded-lg shadow-md">
+                        <h2 class="text-xl font-semibold text-gray-800 mb-4">Recent Activity</h2>
+                        <div class="space-y-4">
+                            <div class="flex items-start">
+                                <div class="p-2 bg-green-100 text-green-500 rounded-full mr-3">
+                                    <i class="fas fa-check-circle"></i>
+                                </div>
+                                <div>
+                                    <p class="font-medium">New order received</p>
+                                    <p class="text-sm text-gray-500">2 minutes ago</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start">
+                                <div class="p-2 bg-blue-100 text-blue-500 rounded-full mr-3">
+                                    <i class="fas fa-user-plus"></i>
+                                </div>
+                                <div>
+                                    <p class="font-medium">New user registered</p>
+                                    <p class="text-sm text-gray-500">10 minutes ago</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start">
+                                <div class="p-2 bg-yellow-100 text-yellow-500 rounded-full mr-3">
+                                    <i class="fas fa-exclamation-triangle"></i>
+                                </div>
+                                <div>
+                                    <p class="font-medium">Server maintenance</p>
+                                    <p class="text-sm text-gray-500">1 hour ago</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Overlay (hidden by default) -->
+    <div id="overlay" class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden animate-fade-in"></div>
+
+    <!-- Login Popup (hidden by default) -->
+    <div id="login-popup" class="fixed inset-0 flex items-center justify-center z-50 hidden">
+        <div class="bg-white rounded-xl shadow-2xl w-full max-w-md mx-4 animate-slide-up">
+            <div class="p-6">
+                <div class="flex justify-between items-center mb-6">
+                    <h2 class="text-2xl font-bold text-gray-800">Welcome Back</h2>
+                    <button id="close-login" class="text-gray-400 hover:text-gray-600">
+                        <i class="fas fa-times text-xl"></i>
+                    </button>
+                </div>
+                
+                <form id="login-form" class="space-y-4">
+                    <div>
+                        <label for="login-email" class="block text-sm font-medium text-gray-700 mb-1">Email</label>
+                        <input type="email" id="login-email" required 
+                               class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    </div>
+                    
+                    <div>
+                        <label for="login-password" class="block text-sm font-medium text-gray-700 mb-1">Password</label>
+                        <input type="password" id="login-password" required 
+                               class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    </div>
+                    
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center">
+                            <input type="checkbox" id="remember-me" class="custom-checkbox">
+                            <label for="remember-me" class="ml-2 text-sm text-gray-600">Remember me</label>
+                        </div>
+                        <a href="#" class="text-sm text-blue-500 hover:underline">Forgot password?</a>
+                    </div>
+                    
+                    <button type="submit" class="w-full bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600 transition-colors">
+                        Login
+                    </button>
+                    
+                    <div class="text-center text-sm text-gray-500">
+                        Don't have an account? 
+                        <button type="button" id="switch-to-signup" class="text-blue-500 hover:underline">Sign up</button>
+                    </div>
+                </form>
+                
+                <div class="mt-6">
+                    <div class="relative">
+                        <div class="absolute inset-0 flex items-center">
+                            <div class="w-full border-t border-gray-300"></div>
+                        </div>
+                        <div class="relative flex justify-center text-sm">
+                            <span class="px-2 bg-white text-gray-500">Or continue with</span>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-4 grid grid-cols-3 gap-3">
+                        <button type="button" class="flex items-center justify-center py-2 px-4 border border-gray-300 rounded-md bg-white hover:bg-gray-50">
+                            <i class="fab fa-google text-red-500 mr-2"></i>
+                            <span class="text-sm font-medium text-gray-700">Google</span>
+                        </button>
+                        <button type="button" class="flex items-center justify-center py-2 px-4 border border-gray-300 rounded-md bg-white hover:bg-gray-50">
+                            <i class="fab fa-facebook-f text-blue-600 mr-2"></i>
+                            <span class="text-sm font-medium text-gray-700">Facebook</span>
+                        </button>
+                        <button type="button" class="flex items-center justify-center py-2 px-4 border border-gray-300 rounded-md bg-white hover:bg-gray-50">
+                            <i class="fab fa-apple text-gray-800 mr-2"></i>
+                            <span class="text-sm font-medium text-gray-700">Apple</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Signup Popup (hidden by default) -->
+    <div id="signup-popup" class="fixed inset-0 flex items-center justify-center z-50 hidden">
+        <div class="bg-white rounded-xl shadow-2xl w-full max-w-md mx-4 animate-slide-up">
+            <div class="p-6">
+                <div class="flex justify-between items-center mb-6">
+                    <h2 class="text-2xl font-bold text-gray-800">Create Account</h2>
+                    <button id="close-signup" class="text-gray-400 hover:text-gray-600">
+                        <i class="fas fa-times text-xl"></i>
+                    </button>
+                </div>
+                
+                <form id="signup-form" class="space-y-4">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div>
+                            <label for="signup-firstname" class="block text-sm font-medium text-gray-700 mb-1">First Name</label>
+                            <input type="text" id="signup-firstname" required 
+                                   class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        </div>
+                        <div>
+                            <label for="signup-lastname" class="block text-sm font-medium text-gray-700 mb-1">Last Name</label>
+                            <input type="text" id="signup-lastname" required 
+                                   class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <label for="signup-email" class="block text-sm font-medium text-gray-700 mb-1">Email</label>
+                        <input type="email" id="signup-email" required 
+                               class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    </div>
+                    
+                    <div>
+                        <label for="signup-password" class="block text-sm font-medium text-gray-700 mb-1">Password</label>
+                        <input type="password" id="signup-password" required 
+                               class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        <p class="mt-1 text-xs text-gray-500">Must be at least 8 characters</p>
+                    </div>
+                    
+                    <div>
+                        <label for="signup-confirm-password" class="block text-sm font-medium text-gray-700 mb-1">Confirm Password</label>
+                        <input type="password" id="signup-confirm-password" required 
+                               class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    </div>
+                    
+                    <div class="flex items-center">
+                        <input type="checkbox" id="terms" required class="custom-checkbox">
+                        <label for="terms" class="ml-2 text-sm text-gray-600">
+                            I agree to the <a href="#" class="text-blue-500 hover:underline">Terms of Service</a> and <a href="#" class="text-blue-500 hover:underline">Privacy Policy</a>
+                        </label>
+                    </div>
+                    
+                    <button type="submit" class="w-full bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600 transition-colors">
+                        Create Account
+                    </button>
+                    
+                    <div class="text-center text-sm text-gray-500">
+                        Already have an account? 
+                        <button type="button" id="switch-to-login" class="text-blue-500 hover:underline">Login</button>
+                    </div>
+                </form>
+                
+                <div class="mt-6">
+                    <div class="relative">
+                        <div class="absolute inset-0 flex items-center">
+                            <div class="w-full border-t border-gray-300"></div>
+                        </div>
+                        <div class="relative flex justify-center text-sm">
+                            <span class="px-2 bg-white text-gray-500">Or sign up with</span>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-4 grid grid-cols-3 gap-3">
+                        <button type="button" class="flex items-center justify-center py-2 px-4 border border-gray-300 rounded-md bg-white hover:bg-gray-50">
+                            <i class="fab fa-google text-red-500 mr-2"></i>
+                            <span class="text-sm font-medium text-gray-700">Google</span>
+                        </button>
+                        <button type="button" class="flex items-center justify-center py-2 px-4 border border-gray-300 rounded-md bg-white hover:bg-gray-50">
+                            <i class="fab fa-facebook-f text-blue-600 mr-2"></i>
+                            <span class="text-sm font-medium text-gray-700">Facebook</span>
+                        </button>
+                        <button type="button" class="flex items-center justify-center py-2 px-4 border border-gray-300 rounded-md bg-white hover:bg-gray-50">
+                            <i class="fab fa-apple text-gray-800 mr-2"></i>
+                            <span class="text-sm font-medium text-gray-700">Apple</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Success Toast (hidden by default) -->
+    <div id="success-toast" class="fixed bottom-4 right-4 bg-green-500 text-white px-6 py-3 rounded-lg shadow-lg hidden animate-slide-up">
+        <div class="flex items-center">
+            <i class="fas fa-check-circle mr-2"></i>
+            <span id="toast-message">Success! Your account has been created.</span>
+            <button id="close-toast" class="ml-4 text-white hover:text-gray-200">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+    </div>
+
+    <script>
+        // DOM Elements
+        const loginBtn = document.getElementById('login-btn');
+        const signupBtn = document.getElementById('signup-btn');
+        const loginPopup = document.getElementById('login-popup');
+        const signupPopup = document.getElementById('signup-popup');
+        const overlay = document.getElementById('overlay');
+        const closeLogin = document.getElementById('close-login');
+        const closeSignup = document.getElementById('close-signup');
+        const switchToSignup = document.getElementById('switch-to-signup');
+        const switchToLogin = document.getElementById('switch-to-login');
+        const loginForm = document.getElementById('login-form');
+        const signupForm = document.getElementById('signup-form');
+        const successToast = document.getElementById('success-toast');
+        const closeToast = document.getElementById('close-toast');
+        const toastMessage = document.getElementById('toast-message');
+
+        // Show Login Popup
+        loginBtn.addEventListener('click', () => {
+            overlay.classList.remove('hidden');
+            loginPopup.classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+        });
+
+        // Show Signup Popup
+        signupBtn.addEventListener('click', () => {
+            overlay.classList.remove('hidden');
+            signupPopup.classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+        });
+
+        // Close Popups
+        const closePopups = () => {
+            overlay.classList.add('hidden');
+            loginPopup.classList.add('hidden');
+            signupPopup.classList.add('hidden');
+            document.body.style.overflow = 'auto';
+        };
+
+        closeLogin.addEventListener('click', closePopups);
+        closeSignup.addEventListener('click', closePopups);
+        overlay.addEventListener('click', closePopups);
+
+        // Switch between Login and Signup
+        switchToSignup.addEventListener('click', () => {
+            loginPopup.classList.add('hidden');
+            signupPopup.classList.remove('hidden');
+        });
+
+        switchToLogin.addEventListener('click', () => {
+            signupPopup.classList.add('hidden');
+            loginPopup.classList.remove('hidden');
+        });
+
+        // Close Toast
+        closeToast.addEventListener('click', () => {
+            successToast.classList.add('hidden');
+        });
+
+        // Form Submissions
+        loginForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const email = document.getElementById('login-email').value;
+            const password = document.getElementById('login-password').value;
+            
+            // Here you would typically validate and send to server
+            console.log('Login attempt with:', { email, password });
+            
+            // Simulate successful login
+            closePopups();
+            toastMessage.textContent = "Success! You're now logged in.";
+            successToast.classList.remove('hidden');
+            
+            // Hide toast after 5 seconds
+            setTimeout(() => {
+                successToast.classList.add('hidden');
+            }, 5000);
+        });
+
+        signupForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const firstName = document.getElementById('signup-firstname').value;
+            const lastName = document.getElementById('signup-lastname').value;
+            const email = document.getElementById('signup-email').value;
+            const password = document.getElementById('signup-password').value;
+            const confirmPassword = document.getElementById('signup-confirm-password').value;
+            
+            // Simple validation
+            if (password !== confirmPassword) {
+                alert("Passwords don't match!");
+                return;
+            }
+            
+            // Here you would typically send to server
+            console.log('Signup attempt with:', { firstName, lastName, email, password });
+            
+            // Simulate successful signup
+            closePopups();
+            toastMessage.textContent = "Success! Your account has been created.";
+            successToast.classList.remove('hidden');
+            
+            // Hide toast after 5 seconds
+            setTimeout(() => {
+                successToast.classList.add('hidden');
+            }, 5000);
+        });
+
+        // Escape key to close popups
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                closePopups();
+            }
+        });
+    </script>
+</body>
+</html>
