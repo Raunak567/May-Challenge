@@ -23,7 +23,7 @@ const App = () => {
         <Route path="/" element={<LandingPage />} />
         <Route path='/Dashboard' element={<Dashboard/>} />
         <Route
-          path="/*"
+          path="/*" 
           element={
             isAuthenticated ? (
               <div className="flex h-screen overflow-hidden bg-slate-900 text-slate-100 font-sans">

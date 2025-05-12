@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 
 import ai_img from "../assets/AI_IMG.jpg"
-import { APP_FEATURES } from "../utils/data"
 import { useNavigate } from 'react-router-dom';
 import Login from './auth/Login';
 
