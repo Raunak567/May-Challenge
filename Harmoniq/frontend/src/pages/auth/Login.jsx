@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-const Login = () => {
+const Login = ({SetCurrentPage}) => {
   const [formData, setFormData] = useState({
     email: '',
     password: '',

@@ -3,6 +3,8 @@ import React, { useState } from 'react';
 import ai_img from "../assets/AI_IMG.jpg"
 import { useNavigate } from 'react-router-dom';
 import Login from './auth/Login';
+import MusicPlayer from './MusicPlayer';
+import Modal from '../components/Modal';
 
 
 const LandingPage = () => {
@@ -10,7 +12,7 @@ const LandingPage = () => {
   const Navigate = useNavigate()
 
   const [openAuthModal , setOpenAuthModal] = useState(false);
-  const [currentPage, SetCurrentPage] = useState("login")
+  const [currentPage, SetCurrentPage] = useState("Login")
 
   const handleCTA = () => {};
 
@@ -74,58 +76,10 @@ const LandingPage = () => {
           </button>
         </div>
 
-        {/* Player Demo */}
-        <div className="bg-white/10 backdrop-blur mt-20 p-6 rounded-2xl max-w-4xl mx-auto">
-          <div className="flex flex-col md:flex-row gap-6">
-            <div className="flex-shrink-0">
-              <div className="w-48 h-48 rounded-xl overflow-hidden shadow-lg relative">
-                <img src="https://source.unsplash.com/random/400x400/?music,album" alt="Album cover" className="w-full h-full object-cover" />
-                <div className="absolute inset-0 bg-gradient-to-t from-black to-transparent opacity-50"></div>
-                <div className="absolute bottom-3 left-3">
-                  <div className="text-white font-bold">Current Playlist</div>
-                  <div className="text-purple-200 text-sm">AI Recommended Mix</div>
-                </div>
-              </div>
-            </div>
-            <div className="flex-grow">
-              <div className="mb-4">
-                <div className="flex justify-between items-center mb-1">
-                  <span className="font-medium">Cosmic Waves</span>
-                  <span className="text-sm text-gray-400">3:42</span>
-                </div>
-                <div className="w-full bg-gray-700 rounded-full h-1.5">
-                  <div className="bg-gradient-to-r from-[#6e00ff] to-[#ff00cc] h-1.5 rounded-full" style={{ width: '65%' }}></div>
-                </div>
-              </div>
-              <div className="flex items-center justify-between mb-6 text-gray-300">
-                <i className="fas fa-random hover:text-white cursor-pointer"></i>
-                <i className="fas fa-step-backward hover:text-white cursor-pointer"></i>
-                <button className="w-12 h-12 rounded-full bg-gradient-to-r from-[#6e00ff] to-[#ff00cc] flex items-center justify-center text-white">
-                  <i className="fas fa-pause"></i>
-                </button>
-                <i className="fas fa-step-forward hover:text-white cursor-pointer"></i>
-                <i className="fas fa-redo hover:text-white cursor-pointer"></i>
-              </div>
-              <div className="flex items-center gap-2">
-                <i className="fas fa-volume-down text-gray-400"></i>
-                <div className="w-full bg-gray-700 rounded-full h-1.5">
-                  <div className="bg-gradient-to-r from-[#6e00ff] to-[#ff00cc] h-1.5 rounded-full" style={{ width: '80%' }}></div>
-                </div>
-              </div>
-              <div className="mt-6 flex flex-wrap gap-2">
-                {['Electronic', 'Chill', 'Ambient', 'Study'].map(tag => (
-                  <span key={tag} className="px-3 py-1 bg-purple-900 bg-opacity-40 rounded-full text-xs hover:translate-y-[-2px] transition shadow-md">
-                    {tag}
-                  </span>
-                ))}
-                <button className="px-3 py-1 bg-gray-700 bg-opacity-40 rounded-full text-xs hover:bg-gray-600 flex items-center">
-                  <i className="fas fa-plus mr-1"></i> Add Tag
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
+        <MusicPlayer/>
+
+        </section>
+        
       {/* Features Section */}
       <section id="features" className="py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
         <div className="text-center mb-16">
@@ -382,7 +336,7 @@ const LandingPage = () => {
     </footer>
 
 
-    {/* <Modal
+    <Modal
       isOpen={openAuthModal}
       onclose={() => {
         setOpenAuthModal(false);
@@ -398,7 +352,7 @@ const LandingPage = () => {
           <signUp SetCurrentPage = {SetCurrentPage} />
         )}
         </div>
-        </Modal> */}
+        </Modal>
       
     </div>
   );
