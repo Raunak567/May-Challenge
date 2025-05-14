@@ -2,19 +2,15 @@ import React, { useState } from 'react';
 
 import ai_img from "../assets/AI_IMG.jpg"
 import { useNavigate } from 'react-router-dom';
-import Login from './auth/Login';
+import { Link } from 'react-scroll';
+
 import MusicPlayer from './MusicPlayer';
-import Modal from '../components/Modal';
-import Dashboard from './Home/Dashboard';
+
 
 
 const LandingPage = () => {
 
   const navigate = useNavigate()
-  const [openAuthModal , setOpenAuthModal] = useState(false);
-  const [currentPage, setCurrentPage] = useState("Login")
-
-  const handleCTA = () => {};
 
   return (
     <div className="bg-[#0f0f13] text-[#f1f1f1] font-[Poppins]">
@@ -40,17 +36,21 @@ const LandingPage = () => {
             </div>
             <div className="hidden md:block">
               <div className="ml-10 flex items-baseline space-x-4">
-                <a href="#features" className="px-3 py-2 rounded-md text-sm font-medium hover:text-purple-300">Features</a>
-                <a href="#how-it-works" className="px-3 py-2 rounded-md text-sm font-medium hover:text-purple-300">How It Works</a>
-                <a href="#testimonials" className="px-3 py-2 rounded-md text-sm font-medium hover:text-purple-300">Testimonials</a>
+                <Link to="features" smooth={true} duration={500} className="px-3 py-2 rounded-md text-sm font-medium hover:text-purple-300 cursor-pointer">
+                  Features
+                </Link>
+                <Link to="how-it-works" smooth={true} duration={500} className="px-3 py-2 rounded-md text-sm font-medium hover:text-purple-300 cursor-pointer">
+                How It Works</Link>
+                <Link to="testimonials" smooth={true} duration={500} className="px-3 py-2 rounded-md text-sm font-medium hover:text-purple-300 cursor-pointer">
+                Testimonials</Link>
               </div>
             </div>
             <div className="hidden md:block">
               <div className="flex space-x-4">
                 <button className="text-white px-4 py-2 rounded-full text-sm font-medium hover:bg-black hover:bg-opacity-5 transition"
-                onClick={() => setOpenAuthModal(true)}>Login</button>
+                  onClick={() => setOpenAuthModal(true)}>Login</button>
                 <button className="bg-gradient-to-r from-[#6e00ff] to-[#ff00cc] text-white px-4 py-2 rounded-full text-sm font-medium hover:opacity-90 transition"
-                onClick={() => setOpenAuthModal(true)}>Sign Up</button>
+                  onClick={() => setOpenAuthModal(true)}>Sign Up</button>
               </div>
             </div>
           </div>
@@ -67,7 +67,7 @@ const LandingPage = () => {
         </p>
         <div className="flex flex-col sm:flex-row justify-center gap-4">
           <button className="bg-gradient-to-r from-[#6e00ff] to-[#ff00cc] text-white px-8 py-4 rounded-full text-lg font-medium hover:opacity-90 transition flex items-center justify-center"
-          onClick={() => navigate('/dashboard')}>
+            onClick={() => navigate('/dashboard')}>
             <i className="fas fa-play mr-2"></i>
             Start Listening Now
           </button>
@@ -76,190 +76,190 @@ const LandingPage = () => {
           </button>
         </div>
 
-        <MusicPlayer/>
+        <MusicPlayer />
 
-        </section>
-        
+      </section>
+
       {/* Features Section */}
       <section id="features" className="py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
         <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">Powerful Features</h2>
-            <p className="text-gray-400 max-w-2xl mx-auto">Harmoniq combines cutting-edge technology with intuitive design to revolutionize your music experience.</p>
+          <h2 className="text-3xl md:text-4xl font-bold mb-4">Powerful Features</h2>
+          <p className="text-gray-400 max-w-2xl mx-auto">Harmoniq combines cutting-edge technology with intuitive design to revolutionize your music experience.</p>
         </div>
-        
+
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            <div className="glass-card p-6 rounded-xl hover:bg-white hover:bg-opacity-10 transition">
-                <div className="w-12 h-12 gradient-bg rounded-lg flex items-center justify-center mb-4">
-                    <i className="fas fa-brain text-white text-xl"></i>
-                </div>
-                <h3 className="text-xl font-semibold mb-2">AI Music Recommendations</h3>
-                <p className="text-gray-400">Our advanced AI learns your taste and suggests perfect tracks you'll love, even before you know you want them.</p>
+          <div className="glass-card p-6 rounded-xl hover:bg-white hover:bg-opacity-10 transition">
+            <div className="w-12 h-12 gradient-bg rounded-lg flex items-center justify-center mb-4">
+              <i className="fas fa-brain text-white text-xl"></i>
             </div>
-            
-          
-            <div className="glass-card p-6 rounded-xl hover:bg-white hover:bg-opacity-10 transition">
-                <div className="w-12 h-12 gradient-bg rounded-lg flex items-center justify-center mb-4">
-                    <i className="fas fa-tags text-white text-xl"></i>
-                </div>
-                <h3 className="text-xl font-semibold mb-2">Smart Tagging System</h3>
-                <p className="text-gray-400">Organize your library with custom tags for mood, activity, or any category you choose. Auto-tagging available.</p>
+            <h3 className="text-xl font-semibold mb-2">AI Music Recommendations</h3>
+            <p className="text-gray-400">Our advanced AI learns your taste and suggests perfect tracks you'll love, even before you know you want them.</p>
+          </div>
+
+
+          <div className="glass-card p-6 rounded-xl hover:bg-white hover:bg-opacity-10 transition">
+            <div className="w-12 h-12 gradient-bg rounded-lg flex items-center justify-center mb-4">
+              <i className="fas fa-tags text-white text-xl"></i>
             </div>
-            
-  
-            <div className="glass-card p-6 rounded-xl hover:bg-white hover:bg-opacity-10 transition">
-                <div className="w-12 h-12 gradient-bg rounded-lg flex items-center justify-center mb-4">
-                    <i className="fas fa-sliders-h text-white text-xl"></i>
-                </div>
-                <h3 className="text-xl font-semibold mb-2">Dynamic Sound Profiles</h3>
-                <p className="text-gray-400">Adaptive audio processing that automatically adjusts EQ and effects based on genre, tags, and your preferences.</p>
+            <h3 className="text-xl font-semibold mb-2">Smart Tagging System</h3>
+            <p className="text-gray-400">Organize your library with custom tags for mood, activity, or any category you choose. Auto-tagging available.</p>
+          </div>
+
+
+          <div className="glass-card p-6 rounded-xl hover:bg-white hover:bg-opacity-10 transition">
+            <div className="w-12 h-12 gradient-bg rounded-lg flex items-center justify-center mb-4">
+              <i className="fas fa-sliders-h text-white text-xl"></i>
             </div>
-            
-   
-            <div className="glass-card p-6 rounded-xl hover:bg-white hover:bg-opacity-10 transition">
-                <div className="w-12 h-12 gradient-bg rounded-lg flex items-center justify-center mb-4">
-                    <i className="fas fa-users text-white text-xl"></i>
-                </div>
-                <h3 className="text-xl font-semibold mb-2">Collaborative Playlists</h3>
-                <p className="text-gray-400">Create shared playlists with friends where everyone can add tracks and vote on what plays next.</p>
+            <h3 className="text-xl font-semibold mb-2">Dynamic Sound Profiles</h3>
+            <p className="text-gray-400">Adaptive audio processing that automatically adjusts EQ and effects based on genre, tags, and your preferences.</p>
+          </div>
+
+
+          <div className="glass-card p-6 rounded-xl hover:bg-white hover:bg-opacity-10 transition">
+            <div className="w-12 h-12 gradient-bg rounded-lg flex items-center justify-center mb-4">
+              <i className="fas fa-users text-white text-xl"></i>
             </div>
-            
-               <div className="glass-card p-6 rounded-xl hover:bg-white hover:bg-opacity-10 transition">
-                <div className="w-12 h-12 gradient-bg rounded-lg flex items-center justify-center mb-4">
-                    <i className="fas fa-moon text-white text-xl"></i>
-                </div>
-                <h3 className="text-xl font-semibold mb-2">Sleep Timer & Fade</h3>
-                <p className="text-gray-400">Fall asleep to your favorite music with customizable fade-out and automatic shut-off after your chosen duration.</p>
+            <h3 className="text-xl font-semibold mb-2">Collaborative Playlists</h3>
+            <p className="text-gray-400">Create shared playlists with friends where everyone can add tracks and vote on what plays next.</p>
+          </div>
+
+          <div className="glass-card p-6 rounded-xl hover:bg-white hover:bg-opacity-10 transition">
+            <div className="w-12 h-12 gradient-bg rounded-lg flex items-center justify-center mb-4">
+              <i className="fas fa-moon text-white text-xl"></i>
             </div>
-            
-    
-            <div className="glass-card p-6 rounded-xl hover:bg-white hover:bg-opacity-10 transition">
-                <div className="w-12 h-12 gradient-bg rounded-lg flex items-center justify-center mb-4">
-                    <i className="fas fa-chart-line text-white text-xl"></i>
-                </div>
-                <h3 className="text-xl font-semibold mb-2">Advanced Analytics</h3>
-                <p className="text-gray-400">Detailed insights into your listening habits, mood patterns, and musical preferences over time.</p>
+            <h3 className="text-xl font-semibold mb-2">Sleep Timer & Fade</h3>
+            <p className="text-gray-400">Fall asleep to your favorite music with customizable fade-out and automatic shut-off after your chosen duration.</p>
+          </div>
+
+
+          <div className="glass-card p-6 rounded-xl hover:bg-white hover:bg-opacity-10 transition">
+            <div className="w-12 h-12 gradient-bg rounded-lg flex items-center justify-center mb-4">
+              <i className="fas fa-chart-line text-white text-xl"></i>
             </div>
+            <h3 className="text-xl font-semibold mb-2">Advanced Analytics</h3>
+            <p className="text-gray-400">Detailed insights into your listening habits, mood patterns, and musical preferences over time.</p>
+          </div>
         </div>
-    </section>
+      </section>
 
       {/* How It Works Section */}
-    <section id="how-it-works" className="py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto bg-gradient-to-b from-purple-900/10 to-transparent">
+      <section id="how-it-works" className="py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto bg-gradient-to-b from-purple-900/10 to-transparent">
         <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">How Harmoniq Works</h2>
-            <p className="text-gray-400 max-w-2xl mx-auto">Three simple steps to transform your music experience</p>
+          <h2 className="text-3xl md:text-4xl font-bold mb-4">How Harmoniq Works</h2>
+          <p className="text-gray-400 max-w-2xl mx-auto">Three simple steps to transform your music experience</p>
         </div>
-        
+
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
 
-            <div className="text-center">
-                <div className="w-20 h-20 gradient-bg rounded-full flex items-center justify-center mx-auto mb-6 text-2xl font-bold">1</div>
-                <h3 className="text-xl font-semibold mb-2">Connect Your Music</h3>
-                <p className="text-gray-400">Link your existing music library from Spotify, Apple Music, or upload your own files. We support all major platforms.</p>
-            </div>
-            
+          <div className="text-center">
+            <div className="w-20 h-20 gradient-bg rounded-full flex items-center justify-center mx-auto mb-6 text-2xl font-bold">1</div>
+            <h3 className="text-xl font-semibold mb-2">Connect Your Music</h3>
+            <p className="text-gray-400">Link your existing music library from Spotify, Apple Music, or upload your own files. We support all major platforms.</p>
+          </div>
 
-            <div className="text-center">
-                <div className="w-20 h-20 gradient-bg rounded-full flex items-center justify-center mx-auto mb-6 text-2xl font-bold">2</div>
-                <h3 className="text-xl font-semibold mb-2">Personalize Your Experience</h3>
-                <p className="text-gray-400">Teach our AI your preferences by liking tracks, adding tags, and creating playlists. The more you use it, the smarter it gets.</p>
-            </div>
-            
 
-            <div className="text-center">
-                <div className="w-20 h-20 gradient-bg rounded-full flex items-center justify-center mx-auto mb-6 text-2xl font-bold">3</div>
-                <h3 className="text-xl font-semibold mb-2">Discover & Enjoy</h3>
-                <p className="text-gray-400">Let Harmoniq surprise you with perfect recommendations and automatically organized playlists tailored to your current mood.</p>
-            </div>
+          <div className="text-center">
+            <div className="w-20 h-20 gradient-bg rounded-full flex items-center justify-center mx-auto mb-6 text-2xl font-bold">2</div>
+            <h3 className="text-xl font-semibold mb-2">Personalize Your Experience</h3>
+            <p className="text-gray-400">Teach our AI your preferences by liking tracks, adding tags, and creating playlists. The more you use it, the smarter it gets.</p>
+          </div>
+
+
+          <div className="text-center">
+            <div className="w-20 h-20 gradient-bg rounded-full flex items-center justify-center mx-auto mb-6 text-2xl font-bold">3</div>
+            <h3 className="text-xl font-semibold mb-2">Discover & Enjoy</h3>
+            <p className="text-gray-400">Let Harmoniq surprise you with perfect recommendations and automatically organized playlists tailored to your current mood.</p>
+          </div>
         </div>
-        
+
         <div className="mt-16 glass-card p-8 rounded-2xl">
-            <div className="flex flex-col md:flex-row items-center gap-8">
-                <div className="flex-grow">
-                    <h3 className="text-2xl font-bold mb-4">AI That Understands Your Taste</h3>
-                    <p className="text-gray-400 mb-6">Our proprietary machine learning algorithms analyze not just the musical characteristics of your favorite tracks, but also when and how you listen to them, creating a multidimensional understanding of your unique musical identity.</p>
-                    <div className="flex flex-wrap gap-2">
-                        <span className="tag px-3 py-1 bg-purple-900 bg-opacity-40 rounded-full text-sm">Tempo Analysis</span>
-                        <span className="tag px-3 py-1 bg-blue-900 bg-opacity-40 rounded-full text-sm">Harmonic Mapping</span>
-                        <span className="tag px-3 py-1 bg-pink-900 bg-opacity-40 rounded-full text-sm">Mood Detection</span>
-                        <span className="tag px-3 py-1 bg-yellow-900 bg-opacity-40 rounded-full text-sm">Context Awareness</span>
-                    </div>
-                </div>
-                <div className="flex-shrink-0">
-                    <div className="w-64 h-64 rounded-xl overflow-hidden shadow-lg">
-                        <img 
-                        src={ai_img}
-                        alt="AI technology" className="w-full h-full object-cover" />
-                    </div>
-                </div>
+          <div className="flex flex-col md:flex-row items-center gap-8">
+            <div className="flex-grow">
+              <h3 className="text-2xl font-bold mb-4">AI That Understands Your Taste</h3>
+              <p className="text-gray-400 mb-6">Our proprietary machine learning algorithms analyze not just the musical characteristics of your favorite tracks, but also when and how you listen to them, creating a multidimensional understanding of your unique musical identity.</p>
+              <div className="flex flex-wrap gap-2">
+                <span className="tag px-3 py-1 bg-purple-900 bg-opacity-40 rounded-full text-sm">Tempo Analysis</span>
+                <span className="tag px-3 py-1 bg-blue-900 bg-opacity-40 rounded-full text-sm">Harmonic Mapping</span>
+                <span className="tag px-3 py-1 bg-pink-900 bg-opacity-40 rounded-full text-sm">Mood Detection</span>
+                <span className="tag px-3 py-1 bg-yellow-900 bg-opacity-40 rounded-full text-sm">Context Awareness</span>
+              </div>
             </div>
+            <div className="flex-shrink-0">
+              <div className="w-64 h-64 rounded-xl overflow-hidden shadow-lg">
+                <img
+                  src={ai_img}
+                  alt="AI technology" className="w-full h-full object-cover" />
+              </div>
+            </div>
+          </div>
         </div>
-    </section>
+      </section>
 
-       {/* Testimonials Section  */}
-    <section id="testimonials" className="py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto bg-gradient-to-b from-purple-900/10 to-transparent">
+      {/* Testimonials Section  */}
+      <section id="testimonials" className="py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto bg-gradient-to-b from-purple-900/10 to-transparent">
         <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">What Our Users Say</h2>
-            <p className="text-gray-400 max-w-2xl mx-auto">Join thousands of music lovers who transformed their listening experience</p>
+          <h2 className="text-3xl md:text-4xl font-bold mb-4">What Our Users Say</h2>
+          <p className="text-gray-400 max-w-2xl mx-auto">Join thousands of music lovers who transformed their listening experience</p>
         </div>
-        
+
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
 
-            <div className="glass-card p-6 rounded-xl">
-                <div className="flex items-center mb-4">
-                    <img 
-                    src="https://randomuser.me/api/portraits/women/32.jpg"
-                     alt="User" className="w-12 h-12 rounded-full mr-4" />
-                    <div>
-                        <h4 className="font-semibold">Sarah Johnson</h4>
-                        <div className="flex text-yellow-400 text-sm">
-                            <i className="fas fa-star"></i>
-                            <i className="fas fa-star"></i>
-                            <i className="fas fa-star"></i>
-                            <i className="fas fa-star"></i>
-                            <i className="fas fa-star"></i>
-                        </div>
-                    </div>
+          <div className="glass-card p-6 rounded-xl">
+            <div className="flex items-center mb-4">
+              <img
+                src="https://randomuser.me/api/portraits/women/32.jpg"
+                alt="User" className="w-12 h-12 rounded-full mr-4" />
+              <div>
+                <h4 className="font-semibold">Sarah Johnson</h4>
+                <div className="flex text-yellow-400 text-sm">
+                  <i className="fas fa-star"></i>
+                  <i className="fas fa-star"></i>
+                  <i className="fas fa-star"></i>
+                  <i className="fas fa-star"></i>
+                  <i className="fas fa-star"></i>
                 </div>
-                <p className="text-gray-300">"Harmoniq's AI recommendations are scarily accurate. It introduced me to my new favorite band before I even knew they existed!"</p>
+              </div>
             </div>
-            
-            <div className="glass-card p-6 rounded-xl">
-                <div className="flex items-center mb-4">
-                    <img src="https://randomuser.me/api/portraits/men/75.jpg" 
-                    alt="User" className="w-12 h-12 rounded-full mr-4" />
-                    <div>
-                        <h4 className="font-semibold">Michael Chen</h4>
-                        <div className="flex text-yellow-400 text-sm">
-                            <i className="fas fa-star"></i>
-                            <i className="fas fa-star"></i>
-                            <i className="fas fa-star"></i>
-                            <i className="fas fa-star"></i>
-                            <i className="fas fa-star"></i>
-                        </div>
-                    </div>
+            <p className="text-gray-300">"Harmoniq's AI recommendations are scarily accurate. It introduced me to my new favorite band before I even knew they existed!"</p>
+          </div>
+
+          <div className="glass-card p-6 rounded-xl">
+            <div className="flex items-center mb-4">
+              <img src="https://randomuser.me/api/portraits/men/75.jpg"
+                alt="User" className="w-12 h-12 rounded-full mr-4" />
+              <div>
+                <h4 className="font-semibold">Michael Chen</h4>
+                <div className="flex text-yellow-400 text-sm">
+                  <i className="fas fa-star"></i>
+                  <i className="fas fa-star"></i>
+                  <i className="fas fa-star"></i>
+                  <i className="fas fa-star"></i>
+                  <i className="fas fa-star"></i>
                 </div>
-                <p className="text-gray-300">"As a DJ, the tagging system has revolutionized how I organize my library. I can find the perfect track for any mood or crowd in seconds."</p>
+              </div>
             </div>
-            
-            <div className="glass-card p-6 rounded-xl">
-                <div className="flex items-center mb-4">
-                    <img src="https://randomuser.me/api/portraits/women/63.jpg" 
-                    alt="User" className="w-12 h-12 rounded-full mr-4" />
-                    <div>
-                        <h4 className="font-semibold">Emma Rodriguez</h4>
-                        <div className="flex text-yellow-400 text-sm">
-                            <i className="fas fa-star"></i>
-                            <i className="fas fa-star"></i>
-                            <i className="fas fa-star"></i>
-                            <i className="fas fa-star"></i>
-                            <i className="fas fa-star-half-alt"></i>
-                        </div>
-                    </div>
+            <p className="text-gray-300">"As a DJ, the tagging system has revolutionized how I organize my library. I can find the perfect track for any mood or crowd in seconds."</p>
+          </div>
+
+          <div className="glass-card p-6 rounded-xl">
+            <div className="flex items-center mb-4">
+              <img src="https://randomuser.me/api/portraits/women/63.jpg"
+                alt="User" className="w-12 h-12 rounded-full mr-4" />
+              <div>
+                <h4 className="font-semibold">Emma Rodriguez</h4>
+                <div className="flex text-yellow-400 text-sm">
+                  <i className="fas fa-star"></i>
+                  <i className="fas fa-star"></i>
+                  <i className="fas fa-star"></i>
+                  <i className="fas fa-star"></i>
+                  <i className="fas fa-star-half-alt"></i>
                 </div>
-                <p className="text-gray-300">"The collaborative playlists have brought my friend group closer together during lockdown. We take turns adding songs and it's become our virtual hangout."</p>
+              </div>
             </div>
+            <p className="text-gray-300">"The collaborative playlists have brought my friend group closer together during lockdown. We take turns adding songs and it's become our virtual hangout."</p>
+          </div>
         </div>
-    </section>
+      </section>
 
       <section className="py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto text-center">
         <div className="bg-gradient-to-r from-[#6e00ff] to-[#ff00cc] rounded-2xl p-12">
@@ -278,82 +278,62 @@ const LandingPage = () => {
 
 
 
-    {/* Footer  */}
-    <footer className="py-12 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto border-t border-gray-800">
+      {/* Footer  */}
+      <footer className="py-12 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto border-t border-gray-800">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
-            <div>
-                <div className="flex items-center mb-4">
-                    <div className="music-wave mr-2">
-                        <span></span>
-                        <span></span>
-                        <span></span>
-                        <span></span>
-                        <span></span>
-                    </div>
-                    <span className="text-xl font-bold">Harmoniq</span>
-                </div>
-                <p className="text-gray-400 text-sm">Revolutionizing music discovery through AI and smart metadata.</p>
-                <div className="flex mt-4 space-x-4">
-                    <a href="#" className="text-gray-400 hover:text-white"><i className="fab fa-twitter"></i></a>
-                    <a href="#" className="text-gray-400 hover:text-white"><i className="fab fa-instagram"></i></a>
-                    <a href="#" className="text-gray-400 hover:text-white"><i className="fab fa-facebook"></i></a>
-                    <a href="#" className="text-gray-400 hover:text-white"><i className="fab fa-tiktok"></i></a>
-                </div>
+          <div>
+            <div className="flex items-center mb-4">
+              <div className="music-wave mr-2">
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+              </div>
+              <span className="text-xl font-bold">Harmoniq</span>
             </div>
-            
-            <div>
-                <h3 className="text-white font-semibold mb-4">Product</h3>
-                <ul className="space-y-2">
-                    <li><a href="#features" className="text-gray-400 hover:text-white text-sm">Features</a></li>
-                    <li><a href="#" className="text-gray-400 hover:text-white text-sm">Apps</a></li>
-                    <li><a href="#" className="text-gray-400 hover:text-white text-sm">Integrations</a></li>
-                </ul>
+            <p className="text-gray-400 text-sm">Revolutionizing music discovery through AI and smart metadata.</p>
+            <div className="flex mt-4 space-x-4">
+              <a href="#" className="text-gray-400 hover:text-white"><i className="fab fa-twitter"></i></a>
+              <a href="#" className="text-gray-400 hover:text-white"><i className="fab fa-instagram"></i></a>
+              <a href="#" className="text-gray-400 hover:text-white"><i className="fab fa-facebook"></i></a>
+              <a href="#" className="text-gray-400 hover:text-white"><i className="fab fa-tiktok"></i></a>
             </div>
-            
-            <div>
-                <h3 className="text-white font-semibold mb-4">Company</h3>
-                <ul className="space-y-2">
-                    <li><a href="#" className="text-gray-400 hover:text-white text-sm">About</a></li>
-                    <li><a href="#" className="text-gray-400 hover:text-white text-sm">Careers</a></li>
-                    <li><a href="#" className="text-gray-400 hover:text-white text-sm">Blog</a></li>
-                </ul>
-            </div>
-            
-            <div>
-                <h3 className="text-white font-semibold mb-4">Support</h3>
-                <ul className="space-y-2">
-                    <li><a href="#" className="text-gray-400 hover:text-white text-sm">Help Center</a></li>
-                    <li><a href="#" className="text-gray-400 hover:text-white text-sm">Community</a></li>
-                    <li><a href="#" className="text-gray-400 hover:text-white text-sm">Contact</a></li>
-                    <li><a href="#" className="text-gray-400 hover:text-white text-sm">Privacy Policy</a></li>
-                </ul>
-            </div>
+          </div>
+
+          <div>
+            <h3 className="text-white font-semibold mb-4">Product</h3>
+            <ul className="space-y-2">
+              <li><a href="#features" className="text-gray-400 hover:text-white text-sm">Features</a></li>
+              <li><a href="#" className="text-gray-400 hover:text-white text-sm">Apps</a></li>
+              <li><a href="#" className="text-gray-400 hover:text-white text-sm">Integrations</a></li>
+            </ul>
+          </div>
+
+          <div>
+            <h3 className="text-white font-semibold mb-4">Company</h3>
+            <ul className="space-y-2">
+              <li><a href="#" className="text-gray-400 hover:text-white text-sm">About</a></li>
+              <li><a href="#" className="text-gray-400 hover:text-white text-sm">Careers</a></li>
+              <li><a href="#" className="text-gray-400 hover:text-white text-sm">Blog</a></li>
+            </ul>
+          </div>
+
+          <div>
+            <h3 className="text-white font-semibold mb-4">Support</h3>
+            <ul className="space-y-2">
+              <li><a href="#" className="text-gray-400 hover:text-white text-sm">Help Center</a></li>
+              <li><a href="#" className="text-gray-400 hover:text-white text-sm">Community</a></li>
+              <li><a href="#" className="text-gray-400 hover:text-white text-sm">Contact</a></li>
+              <li><a href="#" className="text-gray-400 hover:text-white text-sm">Privacy Policy</a></li>
+            </ul>
+          </div>
         </div>
-        
+
         <div className="mt-12 pt-8 border-t border-gray-800 text-center text-gray-400 text-sm">
-            <p>© 2023 Harmoniq. All rights reserved. Music for everyone.</p>
+          <p>© 2023 Harmoniq. All rights reserved. Music for everyone.</p>
         </div>
-    </footer>
-
-
-    <Modal
-      isOpen={openAuthModal}
-      onclose={() => {
-        setOpenAuthModal(false);
-        setCurrentPage("Login");
-      }}
-      hideHeader
-      >
-      <div>
-        {currentPage === "Login" && (
-          <Login setCurrentPage={setCurrentPage} />
-        )}
-        {currentPage === "signup" && (
-          <signUp setCurrentPage = {setCurrentPage} />
-        )}
-        </div>
-        </Modal>
-      
+      </footer>
     </div>
   );
 };

@@ -1,4 +1,7 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
+
+
 const Dashboard = () => {
 
   const tags = [
@@ -40,8 +43,20 @@ const Dashboard = () => {
     },
   ];
 
+  const navItems = [
+    ['Dashboard', 'home', '/'],
+    ['Favorites', 'heart', '/favorites'],
+    ['Moods', 'smile-beam', '/moods'],
+    ['Karaoke', 'microphone-alt', '/karaoke'],
+    ['Chatroom', 'comments', '/chatroom'],
+    ['AI Discover', 'robot', '/ai-discover'],
+    ['Library', 'compact-disc', '/library'],
+    ['Tags', 'tags', '/tags'],
+    ['Settings', 'sliders-h', '/settings'],
+  ];
+
   return (
-    <div className="min-h-screen gradient-bg font-[Poppins] text-[#e0e0e0]">
+    <div id='gradient-bg' className="min-h-screen  font-[Poppins] text-[#e0e0e0]">
       <div className="flex h-screen overflow-hidden">
         {/* Sidebar */}
         <div className="w-64 bg-black bg-opacity-20 border-r border-gray-800 flex flex-col">
@@ -52,28 +67,18 @@ const Dashboard = () => {
             </h1>
           </div>
           <nav className="flex-1 px-4 space-y-2">
-            {[
-              ['Dashboard', 'home'],
-              ['Favorites', 'heart'],
-              ['Moods', 'smile-beam'],
-              ['Karaoke', 'microphone-alt'],
-              ['Chatroom', 'comments'],
-              ['AI Discover', 'robot'],
-              ['Library', 'compact-disc'],
-              ['Tags', 'tags'],
-              ['Settings', 'sliders-h'],
-            ].map(([label, icon], i) => (
-              <a
+            {navItems.map(([label, icon, path], i) => (
+              <Link
                 key={i}
-                href="#"
+                to={path}
                 className={`flex items-center px-4 py-3 rounded-lg ${i === 0
-                  ? 'bg-purple-900 bg-opacity-30 text-white'
-                  : 'text-gray-400 hover:bg-gray-800 hover:bg-opacity-50 hover:text-white'
+                    ? 'bg-purple-900 bg-opacity-30 text-white'
+                    : 'text-gray-400 hover:bg-gray-800 hover:bg-opacity-50 hover:text-white'
                   }`}
               >
                 <i className={`fas fa-${icon} mr-3`}></i>
                 {label}
-              </a>
+              </Link>
             ))}
           </nav>
           <div className="p-4 border-t border-gray-800">
@@ -108,7 +113,7 @@ const Dashboard = () => {
                 <i className="fas fa-bell"></i>
               </button>
               <button class="p-2 rounded-full bg-gray-800 bg-opacity-50 text-gray-300 hover:bg-purple-900 hover:text-white" title="Add Friend">
-                  <i class="fas fa-user-plus"></i>
+                <i class="fas fa-user-plus"></i>
               </button>
               <button className="p-2 rounded-full bg-gray-800 bg-opacity-50 text-gray-300 hover:bg-purple-900 hover:text-white" title="Mail">
                 <i className="fas fa-envelope"></i>
@@ -121,7 +126,7 @@ const Dashboard = () => {
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
               {/* Now Playing */}
               <div className="lg:col-span-2">
-                <div className="glass-card rounded-xl p-6">
+                <div id="glass-card" className="rounded-xl p-6">
                   <h2 className="text-xl font-bold text-white mb-6 flex items-center">
                     <i className="fas fa-play-circle mr-2 text-purple-400"></i>
                     Now Playing
@@ -153,9 +158,10 @@ const Dashboard = () => {
                     </div>
                   </div>
                   <div className="mt-6">
-                    <div className="progress-bar rounded-full mb-2">
+                    <div id="progress-bar" className="rounded-full mb-2">
                       <div
-                        className="progress-fill rounded-full"
+                        id='progress-fill'
+                        className=" rounded-full"
                         style={{ width: '45%' }}
                       ></div>
                     </div>
@@ -184,7 +190,7 @@ const Dashboard = () => {
                 </div>
 
                 {/* Current Queue */}
-                <div className="glass-card rounded-xl p-6 mt-6">
+                <div id="glass-card" className=" rounded-xl p-6 mt-6">
                   <div className="flex justify-between items-center mb-6">
                     <h2 className="text-xl font-bold text-white">
                       <i className="fas fa-list-ol mr-2 text-purple-400"></i>
@@ -230,9 +236,9 @@ const Dashboard = () => {
               </div>
 
               <div class="space-y-6">
-                <div class="glass-card rounded-xl p-6">
+                <div id="glass-card" class=" rounded-xl p-6">
                   <h2 class="text-xl font-bold text-white mb-6 flex items-center">
-                    <i class="fas fa-robot mr-2 text-purple-400 ai-pulse"></i>
+                    <i id="ai-pulse" class="fas fa-robot mr-2 text-purple-400 "></i>
                     AI Recommendations
                   </h2>
                   <div class="space-y-4">
@@ -278,14 +284,14 @@ const Dashboard = () => {
                   </button>
                 </div>
 
-                <div className="glass-card rounded-xl p-6">
+                <div id="glass-card" className=" rounded-xl p-6">
                   <h2 className="text-xl font-bold text-white mb-6">
                     <i className="fas fa-history mr-2 text-purple-400"></i>
                     Recently Played
                   </h2>
 
                   <div className="grid grid-cols-2 gap-3">
-                    <div className="song-card bg-gray-800 bg-opacity-30 rounded-lg p-3 cursor-pointer">
+                    <div id="song-card" className=" bg-gray-800 bg-opacity-30 rounded-lg p-3 cursor-pointer">
                       <img
                         src="https://i.scdn.co/image/ab67616d00001e02ff9ca10b55ce82ae553c8228"
                         alt="Album"
@@ -295,7 +301,7 @@ const Dashboard = () => {
                       <p className="text-xs text-gray-400 truncate">The Weeknd</p>
                     </div>
 
-                    <div className="song-card bg-gray-800 bg-opacity-30 rounded-lg p-3 cursor-pointer">
+                    <div id="song-card" className=" bg-gray-800 bg-opacity-30 rounded-lg p-3 cursor-pointer">
                       <img
                         src="https://i.scdn.co/image/ab67616d00001e02668e3aca3167e6e569a9aa20"
                         alt="Album"
@@ -305,7 +311,7 @@ const Dashboard = () => {
                       <p className="text-xs text-gray-400 truncate">M83</p>
                     </div>
 
-                    <div className="song-card bg-gray-800 bg-opacity-30 rounded-lg p-3 cursor-pointer">
+                    <div id="song-card" className=" bg-gray-800 bg-opacity-30 rounded-lg p-3 cursor-pointer">
                       <img
                         src="https://i.scdn.co/image/ab67616d00001e02a3a0b2a0b2a0b2a0b2a0b2a0"
                         alt="Album"
@@ -315,7 +321,7 @@ const Dashboard = () => {
                       <p className="text-xs text-gray-400 truncate">MGMT</p>
                     </div>
 
-                    <div className="song-card bg-gray-800 bg-opacity-30 rounded-lg p-3 cursor-pointer">
+                    <div id="song-card" className=" bg-gray-800 bg-opacity-30 rounded-lg p-3 cursor-pointer">
                       <img
                         src="https://i.scdn.co/image/ab67616d00001e02b3a0b3a0b3a0b3a0b3a0b3a0"
                         alt="Album"
@@ -326,7 +332,7 @@ const Dashboard = () => {
                     </div>
                   </div>
                 </div>
-                <div className="glass-card rounded-xl p-6">
+                <div id="glass-card" className=" rounded-xl p-6">
                   <h2 className="text-xl font-bold text-white mb-6">
                     <i className="fas fa-tags mr-2 text-purple-400"></i>
                     Mood & Activity Tags
@@ -354,29 +360,29 @@ const Dashboard = () => {
                     </button>
                   </div>
                 </div>
-                <div className="glass-card rounded-xl p-6 mt-6">
-                  <div className="flex justify-between items-center mb-6">
-                    <h2 className="text-xl font-bold text-white">
-                      <i className="fas fa-plus-circle mr-2 text-purple-400"></i>
-                      Recently Added
-                    </h2>
-                    <button className="text-sm text-purple-400 hover:text-purple-300">View All</button>
-                  </div>
+              </div>
+            </div>
+            <div id="glass-card" className=" rounded-xl p-6 mt-6">
+              <div className="flex justify-between items-center mb-6">
+                <h2 className="text-xl font-bold text-white">
+                  <i className="fas fa-plus-circle mr-2 text-purple-400"></i>
+                  Recently Added
+                </h2>
+                <button className="text-sm text-purple-400 hover:text-purple-300">View All</button>
+              </div>
 
-                  <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
-                    {songs.map((song, index) => (
-                      <div
-                        key={index}
-                        className="song-card bg-gray-800 bg-opacity-30 rounded-lg p-3 cursor-pointer"
-                      >
-                        <img src={song.img} alt="Album" className="w-full rounded mb-2" />
-                        <h4 className="text-white text-sm truncate">{song.title}</h4>
-                        <p className="text-xs text-gray-400 truncate">{song.artist}</p>
-                        <div className="waveform mt-2 rounded-full"></div>
-                      </div>
-                    ))}
+              <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
+                {songs.map((song, index) => (
+                  <div
+                    key={index}
+                    id="song-card" className=" bg-gray-800 bg-opacity-30 rounded-lg p-3 cursor-pointer"
+                  >
+                    <img src={song.img} alt="Album" className="w-full rounded mb-2" />
+                    <h4 className="text-white text-sm truncate">{song.title}</h4>
+                    <p className="text-xs text-gray-400 truncate">{song.artist}</p>
+                    <div id="waveform" className=" mt-2 rounded-full"></div>
                   </div>
-                </div>
+                ))}
               </div>
             </div>
           </main>
