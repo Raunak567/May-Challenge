@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import Login from './auth/Login';
 import MusicPlayer from './MusicPlayer';
 import Modal from '../components/Modal';
+import Dashboard from './Home/Dashboard';
 
 
 const LandingPage = () => {
@@ -66,7 +67,7 @@ const LandingPage = () => {
         </p>
         <div className="flex flex-col sm:flex-row justify-center gap-4">
           <button className="bg-gradient-to-r from-[#6e00ff] to-[#ff00cc] text-white px-8 py-4 rounded-full text-lg font-medium hover:opacity-90 transition flex items-center justify-center"
-          onClick={handleCTA}>
+          onClick={() => navigate('/dashboard')}>
             <i className="fas fa-play mr-2"></i>
             Start Listening Now
           </button>

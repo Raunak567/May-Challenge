@@ -216,3 +216,66 @@
             border-radius: 0.75rem;
             opacity: 0.7;
         }
+        .gradient-bg {
+            background: linear-gradient(135deg, #0a0a0a 0%, #141414 100%); /* Subtle black gradient */
+        }
+    
+        .glass-card {
+            background: rgba(20, 20, 20, 0.7); /* Near-black with transparency */
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.05); /* Soft white border */
+        }
+    
+        .progress-bar {
+            height: 4px;
+            background: rgba(255, 255, 255, 0.1); /* Faint background line */
+        }
+    
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #ED3EC8 0%, #34F9FC 100%); /* Magenta to teal */
+            transition: width 0.3s ease;
+        }
+    
+        .tag {
+            transition: all 0.2s ease;
+            background-color: #111111; /* Deep black tag */
+            color: #34F9FC; /* Teal text */
+        }
+    
+        .tag:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3); /* Deeper black shadow */
+        }
+    
+        .song-card {
+            transition: all 0.3s ease;
+            background-color: #121212; /* Dark but not fully black */
+        }
+    
+        .song-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px rgba(0, 0, 0, 0.4);
+        }
+    
+        .waveform {
+            height: 40px;
+            background: linear-gradient(90deg, transparent 0%, rgba(237, 62, 200, 0.2) 50%, transparent 100%);
+            animation: wave 2s infinite linear;
+        }
+    
+        @keyframes wave {
+            0% { background-position: 0% 50%; }
+            100% { background-position: 100% 50%; }
+        }
+    
+        .ai-pulse {
+            animation: pulse 2s infinite;
+            color: #ED3EC8;
+        }
+    
+        @keyframes pulse {
+            0% { opacity: 0.7; }
+            50% { opacity: 1; }
+            100% { opacity: 0.7; }
+        }
