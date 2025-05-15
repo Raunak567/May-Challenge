@@ -72,8 +72,8 @@ const Dashboard = () => {
                 key={i}
                 to={path}
                 className={`flex items-center px-4 py-3 rounded-lg ${i === 0
-                    ? 'bg-purple-900 bg-opacity-30 text-white'
-                    : 'text-gray-400 hover:bg-gray-800 hover:bg-opacity-50 hover:text-white'
+                  ? 'bg-purple-900 bg-opacity-30 text-white'
+                  : 'text-gray-400 hover:bg-gray-800 hover:bg-opacity-50 hover:text-white'
                   }`}
               >
                 <i className={`fas fa-${icon} mr-3`}></i>
@@ -108,15 +108,32 @@ const Dashboard = () => {
                 className="bg-transparent border-none focus:outline-none text-white w-full"
               />
             </div>
-            <div className="flex items-center space-x-4">
-              <button className="p-2 rounded-full bg-gray-800 bg-opacity-50 text-gray-300 hover:bg-purple-900 hover:text-white" title="Notification">
-                <i className="fas fa-bell"></i>
-              </button>
-              <button class="p-2 rounded-full bg-gray-800 bg-opacity-50 text-gray-300 hover:bg-purple-900 hover:text-white" title="Add Friend">
-                <i class="fas fa-user-plus"></i>
-              </button>
-              <button className="p-2 rounded-full bg-gray-800 bg-opacity-50 text-gray-300 hover:bg-purple-900 hover:text-white" title="Mail">
-                <i className="fas fa-envelope"></i>
+            <div class="flex items-center space-x-4">
+              <div class="relative">
+                <button class="action-btn notification-btn" title= "Notification">
+                  <i class="fas fa-bell"></i>
+                </button>
+                <div class="notification-badge">3</div>
+              </div>
+
+              <div class="relative">
+                <button class="action-btn friend-btn" title= "Add Friend">
+                  <i class="fas fa-user-plus"></i>
+                </button>
+              </div>
+
+              <div class="relative">
+                <button class="action-btn message-btn" title= "Massage">
+                  <i class="fas fa-envelope"></i>
+                </button>
+                <div class="notification-badge">7</div>
+              </div>
+
+              <div class="w-px h-8 bg-gray-700 mx-2"></div>
+
+              <button class="flex items-center space-x-2 bg-gray-800 bg-opacity-50 hover:bg-gray-700 px-3 py-2 rounded-full transition-all">
+                <span class="text-sm font-medium text-white">Upgrade</span>
+                <i class="fas fa-crown text-yellow-400"></i>
               </button>
             </div>
           </header>
