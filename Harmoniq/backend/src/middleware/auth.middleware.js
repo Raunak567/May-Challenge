@@ -16,6 +16,6 @@ export const requireAdmin = async (req, res, next) => {
             return res.status(403).json({message: "Forbidden - You must be an admin"});
         }
     } catch (error) {
-        retun res .status(500).json({message: "Server Error"});
+        next(error);
     }
 }

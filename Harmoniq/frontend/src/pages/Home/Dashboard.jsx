@@ -45,7 +45,6 @@ const Dashboard = () => {
 
   const navItems = [
     ['Dashboard', 'home', '/'],
-    ['Favorites', 'heart', '/favorites'],
     ['Moods', 'smile-beam', '/moods'],
     ['Karaoke', 'microphone-alt', '/karaoke'],
     ['Chatroom', 'comments', '/chatroom'],
