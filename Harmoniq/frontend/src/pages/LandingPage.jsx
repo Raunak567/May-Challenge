@@ -3,13 +3,9 @@ import React, { useState } from 'react';
 import ai_img from "../assets/AI_IMG.jpg"
 import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-scroll';
-
 import MusicPlayer from './MusicPlayer';
 
-
-
 const LandingPage = () => {
-
   const navigate = useNavigate()
 
   return (
