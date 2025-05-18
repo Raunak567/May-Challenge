@@ -1,4 +1,7 @@
 import React, { useState } from 'react';
+import { SignedIn , SignedOut, SignOutButton } from '@clerk/clerk-react';
+import SignInOAuthButtons from '../components/SignInOAuthButtons';
+import { LayoutDashboardIcon } from 'lucide-react';
 
 import ai_img from "../assets/AI_IMG.jpg"
 import { useNavigate } from 'react-router-dom';
@@ -7,6 +10,7 @@ import MusicPlayer from './MusicPlayer';
 
 const LandingPage = () => {
   const navigate = useNavigate()
+  const isAdmin = false;
 
   return (
     <div className="bg-[#0f0f13] text-[#f1f1f1] font-[Poppins]">
@@ -42,11 +46,21 @@ const LandingPage = () => {
               </div>
             </div>
             <div className="hidden md:block">
+            <div className='flex items-center gap-2'>
+           {isAdmin && (
+          <Link to="/admin" className='flex items-center'>
+            <LayoutDashboardIcon className='size-4 mr-2' />
+            Admin Dashboard
+          </Link>
+    )}
               <div className="flex space-x-4">
-                <button className="text-white px-4 py-2 rounded-full text-sm font-medium hover:bg-black hover:bg-opacity-5 transition"
-                  onClick={() => setOpenAuthModal(true)}>Login</button>
-                <button className="bg-gradient-to-r from-[#6e00ff] to-[#ff00cc] text-white px-4 py-2 rounded-full text-sm font-medium hover:opacity-90 transition"
-                  onClick={() => setOpenAuthModal(true)}>Sign Up</button>
+              <SignedIn>
+              <SignOutButton className="text-white px-4 py-2 rounded-full text-sm font-medium hover:bg-black hover:bg-opacity-5 transition"/>
+              </SignedIn>
+              <SignedOut>
+                <SignInOAuthButtons/>
+              </SignedOut>
+              </div>
               </div>
             </div>
           </div>

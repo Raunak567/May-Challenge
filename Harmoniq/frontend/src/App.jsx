@@ -6,7 +6,7 @@ import LandingPage from './pages/LandingPage'
 
 import Topbar from './components/Topbar';
 import { AuthenticateWithRedirectCallback } from '@clerk/clerk-react';
-import AuthCallbackPage from './pages/auth/authCallbackPage';
+import AuthCallbackPage from './pages/auth-callback/AuthCallbackPage';
 
 
 const App = () => {
@@ -15,14 +15,13 @@ const App = () => {
     <div>
       <Router>
          <Routes>
-        <Route path="/" element={<Topbar />} />
-        {/* <Route path="/" element={<LandingPage />} /> */}
+        <Route path="/" element={<LandingPage />} />
         <Route path='/sso-callback' element={<AuthenticateWithRedirectCallback
         
         signUpForceRedirectUrl={"/auth-callback"}
         />} />
         <Route path="/auth-callback" element={<AuthCallbackPage />} />
-        {/* <Route path='/Dashboard' element={<Dashboard/>} /> */}
+        <Route path='/Dashboard' element={<Dashboard/>} />
       </Routes>
     </Router>
     </div>
