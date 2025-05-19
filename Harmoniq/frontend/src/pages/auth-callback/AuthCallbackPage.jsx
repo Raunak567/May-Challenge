@@ -1,4 +1,4 @@
-import { useEffect,useState } from "react";
+import { useEffect, useState } from "react";
 import { useUser } from "@clerk/clerk-react";
 import { useNavigate } from "react-router-dom";
 import { axiosInstance } from "../../utils/axios";
@@ -9,12 +9,14 @@ const AuthCallbackPage = () => {
   const { isLoaded, user } = useUser();
   const navigate = useNavigate();
   const [hasSynced, setHasSynced] = useState(false);
+  const [isSyncing, setIsSyncing] = useState(false);
 
   useEffect(() => {
     const syncUser = async () => {
+      if (!isLoaded || !user || hasSynced || isSyncing) return;
+      
+      setIsSyncing(true);
       try {
-        if (!isLoaded || !user || hasSynced) return;
-
         await axiosInstance.post("/auth/callback", {
           id: user.id,
           firstName: user.firstName,
@@ -24,15 +26,17 @@ const AuthCallbackPage = () => {
           username: user.username || user.primaryEmailAddress?.emailAddress?.split("@")[0], 
         });
 
-        setHasSynced(true);  // mark that syncing is done
-        navigate("/Dashboard"); // redirect to the dashboard
+        setHasSynced(true);
+        navigate("/Dashboard");
       } catch (error) {
         console.error("Error in auth Callback", error);
+      } finally {
+        setIsSyncing(false);
       }
     };
 
     syncUser();
-  }, [isLoaded, user, navigate, hasSynced]);
+  }, [isLoaded, user, navigate, hasSynced, isSyncing]);
 
 
 return(
