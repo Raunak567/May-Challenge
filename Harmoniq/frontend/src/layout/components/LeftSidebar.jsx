@@ -1,16 +1,13 @@
 import { buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
-import { useMusicStore } from "@/stores/useMusicStore";
 import { SignedIn } from "@clerk/clerk-react";
 import { HomeIcon, Library, MessageCircle } from "lucide-react";
 import { useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 
 const navItems = [
-  ['Dashboard', 'home', '/'],
   ['Moods', 'smile-beam', '/moods'],
   ['Karaoke', 'microphone-alt', '/karaoke'],
-  ['AI Discover', 'robot', '/ai-discover'],
   ['Library', 'compact-disc', '/library'],
   ['Tags', 'tags', '/tags'],
   ['Settings', 'sliders-h', '/settings'],
@@ -22,6 +19,12 @@ const LeftSidebar = () => {
   return (
     <div className='h-full flex flex-col gap-2'>
       {/* Top nav */}
+      <div class="p-6">
+          <h1 class="text-2xl font-bold text-white flex items-center">
+            <i class="fas fa-music mr-2 text-purple-500"></i>
+              HarmonyFlow
+          </h1>
+      </div>
       <div className='rounded-lg bg-zinc-900 p-4'>
         <div className='space-y-2'>
           <Link

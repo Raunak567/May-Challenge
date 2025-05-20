@@ -3,7 +3,6 @@ import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-d
 import { Toaster } from 'react-hot-toast';
 
 import Dashboard from './pages/Home/Dashboard'
-import LandingPage from './pages/LandingPage'
 import { AuthenticateWithRedirectCallback } from '@clerk/clerk-react';
 import AuthCallbackPage from './pages/auth-callback/AuthCallbackPage';
 import MainLayout from './layout/MainLayout';
@@ -32,7 +31,6 @@ const App = () => {
           <Route path='/' element={<HomePage />} />
           <Route path='/chat' element={<ChatPage />} />
           <Route path='/albums/:albumId' element={<AlbumPage />} />
-          <Route path='/land' element={<LandingPage />} />
           <Route path='/dashboard' element={<Dashboard />} />
           <Route path='*' element={<NotFoundPage />} />
         </Route>
