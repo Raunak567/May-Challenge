@@ -1,0 +1,88 @@
+import { buttonVariants } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
+import { useMusicStore } from "@/stores/useMusicStore";
+import { SignedIn } from "@clerk/clerk-react";
+import { HomeIcon, Library, MessageCircle } from "lucide-react";
+import { useEffect } from "react";
+import { Link, useLocation } from "react-router-dom";
+
+const navItems = [
+  ['Dashboard', 'home', '/'],
+  ['Moods', 'smile-beam', '/moods'],
+  ['Karaoke', 'microphone-alt', '/karaoke'],
+  ['AI Discover', 'robot', '/ai-discover'],
+  ['Library', 'compact-disc', '/library'],
+  ['Tags', 'tags', '/tags'],
+  ['Settings', 'sliders-h', '/settings'],
+];
+
+const LeftSidebar = () => {
+  const location = useLocation(); // Current path
+
+  return (
+    <div className='h-full flex flex-col gap-2'>
+      {/* Top nav */}
+      <div className='rounded-lg bg-zinc-900 p-4'>
+        <div className='space-y-2'>
+          <Link
+            to="/"
+            className={cn(
+              buttonVariants({
+                variant: "ghost",
+                className: "w-full justify-start text-white hover:bg-gray-800 hover:bg-opacity-50 hover:text-white",
+              })
+            )}
+          >
+            <HomeIcon className='mr-2 size-5' />
+            <span className='hidden md:inline'>Home</span>
+          </Link>
+
+          <SignedIn>
+            <Link
+              to="/chat"
+              className={cn(
+                buttonVariants({
+                  variant: "ghost",
+                  className: "w-full justify-start text-white hover:bg-gray-800 hover:bg-opacity-50 hover:text-white",
+                })
+              )}
+            >
+              <MessageCircle className='mr-2 size-5' />
+              <span className='hidden md:inline'>Messages</span>
+            </Link>
+          </SignedIn>
+        </div>
+      </div>
+
+      {/* Nav list */}
+      <nav className="h-full flex flex-col gap-2">
+        <div className='flex-1 rounded-lg bg-zinc-900 p-4'>
+          <div className='space-y-2'>
+            <div className='flex flex-col gap-1'>
+              {navItems.map(([label, icon, path], i) => {
+                const isActive = location.pathname === path;
+                return (
+                  <Link
+                    key={i}
+                    to={path}
+                    className={cn(
+                      "flex items-center px-4 py-3 rounded-lg transition-colors duration-200",
+                      isActive
+                        ? "bg-purple-900 bg-opacity-30 text-white"
+                        : "text-gray-400 hover:bg-gray-800 hover:bg-opacity-50 hover:text-white"
+                    )}
+                  >
+                    <i className={`fas fa-${icon} mr-3`}></i>
+                    {label}
+                  </Link>
+                );
+              })}
+            </div>
+          </div>
+        </div>
+      </nav>
+    </div>
+  );
+};
+
+export default LeftSidebar;
