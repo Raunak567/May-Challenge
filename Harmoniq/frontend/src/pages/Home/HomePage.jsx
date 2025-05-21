@@ -11,10 +11,10 @@ import PlaylistSkeleton from "../../components/skeletons/PlaylistSkeleton";
 const HomePage = () => {
 	const {
 		fetchFeaturedSongs,
-		fetchMadeForYouSongs,
+		fetchAlbums,
 		fetchTrendingSongs,
 		isLoading,
-		madeForYouSongs,
+		albums,
 		featuredSongs,
 		trendingSongs,
 	} = useMusicStore();
@@ -23,16 +23,16 @@ const HomePage = () => {
 
 	useEffect(() => {
 		fetchFeaturedSongs();
-		fetchMadeForYouSongs();
+		fetchAlbums();
 		fetchTrendingSongs();
-	}, [fetchFeaturedSongs, fetchMadeForYouSongs, fetchTrendingSongs]);
+	}, [fetchFeaturedSongs, fetchAlbums, fetchTrendingSongs]);
 
 	useEffect(() => {
-		if (madeForYouSongs.length > 0 && featuredSongs.length > 0 && trendingSongs.length > 0) {
-			const allSongs = [...featuredSongs, ...madeForYouSongs, ...trendingSongs];
+		if (albums.length > 0 && featuredSongs.length > 0 && trendingSongs.length > 0) {
+			const allSongs = [...featuredSongs, ...albums, ...trendingSongs];
 			initializeQueue(allSongs);
 		}
-	}, [initializeQueue, madeForYouSongs, trendingSongs, featuredSongs]);
+	}, [initializeQueue, albums, trendingSongs, featuredSongs]);
 
 	return (
 		<main className='rounded-md overflow-hidden h-full bg-gradient-to-b from-zinc-800 to-zinc-900'>
@@ -49,7 +49,7 @@ const HomePage = () => {
 								<PlaylistSkeleton />
 							) : (
 								<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-									{madeForYouSongs.map((album) => (
+									{albums.map((album) => (
 										<Link
 											to={`/albums/${album._id}`}
 											key={album._id}

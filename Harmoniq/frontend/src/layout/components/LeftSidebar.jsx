@@ -19,9 +19,9 @@ const LeftSidebar = () => {
   return (
     <div className='h-full flex flex-col gap-2'>
       {/* Top nav */}
-      <div class="p-6">
-          <h1 class="text-2xl font-bold text-white flex items-center">
-            <i class="fas fa-music mr-2 text-purple-500"></i>
+      <div className="p-6">
+          <h1 className="text-2xl font-bold text-white flex items-center">
+            <i className="fas fa-music mr-2 text-purple-500"></i>
               HarmonyFlow
           </h1>
       </div>
