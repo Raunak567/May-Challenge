@@ -5,6 +5,8 @@ import FeaturedSection from "./components/FeaturedSection";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import SectionGrid from "./components/SectionGrid";
 import { usePlayerStore } from "@/stores/usePlayerStore";
+import { Link } from "react-router-dom";
+import PlaylistSkeleton from "../../components/skeletons/PlaylistSkeleton";
 
 const HomePage = () => {
 	const {
@@ -41,7 +43,32 @@ const HomePage = () => {
 					<FeaturedSection />
 
 					<div className='space-y-8'>
-						<SectionGrid title='Made For You' songs={madeForYouSongs} isLoading={isLoading} />
+						<div className="space-y-4">
+							<h2 className="text-xl font-semibold">Made For You</h2>
+							{isLoading ? (
+								<PlaylistSkeleton />
+							) : (
+								<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+									{madeForYouSongs.map((album) => (
+										<Link
+											to={`/albums/${album._id}`}
+											key={album._id}
+											className='p-4 hover:bg-zinc-800 rounded-md flex items-center gap-3 group cursor-pointer transition-colors'
+										>
+											<img
+												src={album.imageUrl}
+												alt={album.title}
+												className='size-16 rounded-md flex-shrink-0 object-cover'
+											/>
+											<div className='flex-1 min-w-0'>
+												<p className='font-medium truncate'>{album.title}</p>
+												<p className='text-sm text-zinc-400 truncate'>Album • {album.artist}</p>
+											</div>
+										</Link>
+									))}
+								</div>
+							)}
+						</div>
 						<SectionGrid title='Trending' songs={trendingSongs} isLoading={isLoading} />
 					</div>
 				</div>

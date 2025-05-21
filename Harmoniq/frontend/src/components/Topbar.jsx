@@ -1,5 +1,6 @@
+import React, { useState } from "react";
 import { SignedIn, SignedOut, UserButton } from "@clerk/clerk-react";
-import { LayoutDashboardIcon, Bell, Mail, UserPlus } from "lucide-react";
+import { LayoutDashboardIcon } from "lucide-react";
 import { Link } from "react-router-dom";
 import SignInOAuthButtons from "./SignInOAuthButtons";
 import { useAuthStore } from "@/stores/useAuthStore";
@@ -8,6 +9,31 @@ import { buttonVariants } from "./ui/button";
 
 const Topbar = () => {
   const { isAdmin } = useAuthStore();
+  const [dropdown, setDropdown] = useState({
+    notifications: false,
+    messages: false,
+    friends: false,
+  });
+
+  const [friendName, setFriendName] = useState("");
+  const [friends, setFriends] = useState(["Sarah", "John"]);
+
+  const toggleDropdown = (key) => {
+    setDropdown({
+      notifications: false,
+      messages: false,
+      friends: false,
+      [key]: !dropdown[key],
+    });
+  };
+
+  const addFriend = () => {
+    const trimmed = friendName.trim();
+    if (trimmed && !friends.includes(trimmed)) {
+      setFriends((prev) => [...prev, trimmed]);
+      setFriendName("");
+    }
+  };
 
   return (
     <div className="flex items-center justify-between p-4 sticky top-0 bg-zinc-900/75 backdrop-blur-md z-10 border-b border-gray-800">
@@ -22,7 +48,7 @@ const Topbar = () => {
       </div>
 
       {/* Right side */}
-      <div className="flex items-center gap-4">
+      <div className="flex items-center gap-4 relative">
         {isAdmin && (
           <Link to="/admin" className={cn(buttonVariants({ variant: "outline" }))}>
             <LayoutDashboardIcon className="size-4 mr-2" />
@@ -31,27 +57,78 @@ const Topbar = () => {
         )}
 
         <SignedIn>
-          {/* Notification Icons */}
-          <div className="flex items-center space-x-4">
-            {/* Bell with badge */}
+          <div className="flex items-center gap-4 relative">
+            {/* Notifications */}
             <div className="relative">
-			<button class="action-btn notification-btn" title= "Notification">
-            	<i class="fas fa-bell"></i>
-            </button>
+              <button
+                className="action-btn"
+                title="Notifications"
+                onClick={() => toggleDropdown("notifications")}
+              >
+                <i className="fas fa-bell text-white"></i>
+              </button>
+              {dropdown.notifications && (
+                <div className="absolute right-0 mt-2 w-64 bg-zinc-800 border border-zinc-700 rounded-md shadow-lg z-50">
+                  <div className="p-4 text-sm text-white">No new notifications.</div>
+                </div>
+              )}
             </div>
 
             {/* Add Friend */}
             <div className="relative">
-			<button class="action-btn friend-btn" title= "Add Friend">
-                <i class="fas fa-user-plus"></i>
-            </button>
+              <button
+                className="action-btn"
+                title="Add Friend"
+                onClick={() => toggleDropdown("friends")}
+              >
+                <i className="fas fa-user-plus text-white"></i>
+              </button>
+              {dropdown.friends && (
+                <div className="absolute right-0 mt-2 w-72 bg-zinc-800 border border-zinc-700 rounded-md shadow-lg z-50 p-4 text-white">
+                  <div>
+                    <p className="text-sm mb-2">Add a new friend:</p>
+                    <input
+                      type="text"
+                      value={friendName}
+                      onChange={(e) => setFriendName(e.target.value)}
+                      placeholder="Username"
+                      className="w-full px-3 py-2 bg-zinc-700 text-white rounded mb-2"
+                    />
+                    <button
+                      onClick={addFriend}
+                      className="w-full bg-purple-600 hover:bg-purple-700 py-2 rounded"
+                    >
+                      Send Request
+                    </button>
+                  </div>
+                  <hr className="my-3 border-zinc-600" />
+                  <p className="text-sm font-semibold mb-2">Friends List:</p>
+                  <ul className="space-y-1 max-h-32 overflow-y-auto text-sm">
+                    {friends.map((friend, index) => (
+                      <li key={index} className="flex items-center gap-2">
+                        <i className="fas fa-user text-purple-400"></i>
+                        <span>{friend}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              )}
             </div>
 
-            {/* Mail with badge */}
+            {/* Messages */}
             <div className="relative">
-			<button class="action-btn message-btn" title= "Massage">
-                <i class="fas fa-envelope"></i>
-            </button>
+              <button
+                className="action-btn"
+                title="Messages"
+                onClick={() => toggleDropdown("messages")}
+              >
+                <i className="fas fa-envelope text-white"></i>
+              </button>
+              {dropdown.messages && (
+                <div className="absolute right-0 mt-2 w-64 bg-zinc-800 border border-zinc-700 rounded-md shadow-lg z-50">
+                  <div className="p-4 text-sm text-white">No new messages.</div>
+                </div>
+              )}
             </div>
 
             {/* User profile */}
