@@ -19,12 +19,12 @@ const app = express();
 const __dirname = path.resolve();
 const PORT = process.env.PORT;
 
-app.use(cors(
-    {
-        origin: "http://localhost:3000",
-        credentials: true,
-    }
-));
+app.use(cors({
+    origin: ["http://localhost:3000", "http://localhost:5173"], // Add both Vite dev server and React dev server
+    credentials: true,
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+    allowedHeaders: ['Content-Type', 'Authorization']
+}));
 
 app.use(express.json()); //to parse req body
 app.use(clerkMiddleware())
