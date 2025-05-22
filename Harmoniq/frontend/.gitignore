@@ -23,7 +23,3 @@ dist-ssr
 *.sln
 *.sw?
 
-# Custom folders to ignore
-frontend/public/albums/
-cover_images/
-songs/
