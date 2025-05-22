@@ -49,12 +49,6 @@ const Topbar = () => {
 
       {/* Right side */}
       <div className="flex items-center gap-4 relative">
-        {isAdmin && (
-          <Link to="/admin" className={cn(buttonVariants({ variant: "outline" }))}>
-            <LayoutDashboardIcon className="size-4 mr-2" />
-            Admin Dashboard
-          </Link>
-        )}
 
         <SignedIn>
           <div className="flex items-center gap-4 relative">

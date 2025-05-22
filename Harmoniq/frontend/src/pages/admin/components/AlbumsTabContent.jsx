@@ -5,7 +5,7 @@ import AddAlbumDialog from "./AddAlbumDialog";
 
 const AlbumsTabContent = () => {
 	return (
-		<Card className='bg-zinc-800/50 border-zinc-700/50'>
+		<Card className='bg-blue-900 border-zinc-700 shadow-lg'>
 			<CardHeader>
 				<div className='flex items-center justify-between'>
 					<div>

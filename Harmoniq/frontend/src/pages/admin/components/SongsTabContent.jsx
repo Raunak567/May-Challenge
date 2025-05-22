@@ -5,7 +5,7 @@ import AddSongDialog from "./AddSongDialog";
 
 const SongsTabContent = () => {
 	return (
-		<Card>
+		<Card className="bg-blue-900 border-zinc-700 shadow-lg">
 			<CardHeader>
 				<div className='flex items-center justify-between'>
 					<div>

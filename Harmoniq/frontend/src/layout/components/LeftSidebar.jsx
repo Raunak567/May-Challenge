@@ -1,9 +1,9 @@
 import { buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { SignedIn } from "@clerk/clerk-react";
-import { HomeIcon, Library, MessageCircle } from "lucide-react";
-import { useEffect } from "react";
+import { HomeIcon, MessageCircle, Settings } from "lucide-react";
 import { Link, useLocation } from "react-router-dom";
+import { useAuthStore } from "@/stores/useAuthStore";
 
 const navItems = [
   ['Moods', 'smile-beam', '/moods'],
@@ -14,7 +14,8 @@ const navItems = [
 ];
 
 const LeftSidebar = () => {
-  const location = useLocation(); // Current path
+  const location = useLocation();
+  const { isAdmin } = useAuthStore();
 
   return (
     <div className='h-full flex flex-col gap-2'>
@@ -22,7 +23,7 @@ const LeftSidebar = () => {
       <div className="p-6">
           <h1 className="text-2xl font-bold text-white flex items-center">
             <i className="fas fa-music mr-2 text-purple-500"></i>
-              HarmonyFlow
+              Harmoniq
           </h1>
       </div>
       <div className='rounded-lg bg-zinc-900 p-4'>
@@ -53,6 +54,21 @@ const LeftSidebar = () => {
               <MessageCircle className='mr-2 size-5' />
               <span className='hidden md:inline'>Messages</span>
             </Link>
+
+            {isAdmin && (
+              <Link
+                to="/admin" 
+                className={cn(
+                  buttonVariants({
+                    variant: "ghost",
+                    className: "w-full justify-start text-white hover:bg-gray-800 hover:bg-opacity-50 hover:text-white",
+                  })
+                )}
+              >
+                <Settings className='mr-2 size-5' />
+                <span className='hidden md:inline'>Admin Dashboard</span>
+              </Link>
+            )}
           </SignedIn>
         </div>
       </div>

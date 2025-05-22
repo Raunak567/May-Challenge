@@ -92,10 +92,10 @@ const AddSongDialog = () => {
         </Button>
       </DialogTrigger>
 
-      <DialogContent className="bg-zinc-900 border-zinc-700 max-h-[80vh] overflow-auto">
+      <DialogContent className="bg-black border-zinc-800 text-white max-h-[80vh] overflow-auto">
         <DialogHeader>
-          <DialogTitle>Add New Song</DialogTitle>
-          <DialogDescription>Add a new song to your music library</DialogDescription>
+          <DialogTitle className="text-white">Add New Song</DialogTitle>
+          <DialogDescription className="text-zinc-400">Add a new song to your music library</DialogDescription>
         </DialogHeader>
 
         <div className="space-y-4 py-4">
@@ -117,7 +117,7 @@ const AddSongDialog = () => {
 
           {/* image upload area */}
           <div
-            className="flex items-center justify-center p-6 border-2 border-dashed border-zinc-700 rounded-lg cursor-pointer"
+            className="flex items-center justify-center p-6 border-2 border-dashed border-zinc-700 rounded-lg cursor-pointer hover:border-zinc-600"
             onClick={() => imageInputRef.current?.click()}
           >
             <div className="text-center">
@@ -132,7 +132,7 @@ const AddSongDialog = () => {
                     <Upload className="h-6 w-6 text-zinc-400" />
                   </div>
                   <div className="text-sm text-zinc-400 mb-2">Upload artwork</div>
-                  <Button variant="outline" size="sm" className="text-xs">
+                  <Button variant="outline" size="sm" className="text-xs bg-zinc-800 text-white border-zinc-700 hover:bg-zinc-700">
                     Choose File
                   </Button>
                 </>
@@ -142,9 +142,13 @@ const AddSongDialog = () => {
 
           {/* Audio upload */}
           <div className="space-y-2">
-            <label className="text-sm font-medium">Audio File</label>
+            <label className="text-sm font-medium text-white">Audio File</label>
             <div className="flex items-center gap-2">
-              <Button variant="outline" onClick={() => audioInputRef.current?.click()} className="w-full">
+              <Button 
+                variant="outline" 
+                onClick={() => audioInputRef.current?.click()} 
+                className="w-full bg-zinc-800 text-white border-zinc-700 hover:bg-zinc-700"
+              >
                 {files.audio ? files.audio.name.slice(0, 20) : "Choose Audio File"}
               </Button>
             </div>
@@ -152,47 +156,47 @@ const AddSongDialog = () => {
 
           {/* other fields */}
           <div className="space-y-2">
-            <label className="text-sm font-medium">Title</label>
+            <label className="text-sm font-medium text-white">Title</label>
             <Input
               value={newSong.title}
               onChange={(e) => setNewSong({ ...newSong, title: e.target.value })}
-              className="bg-zinc-800 border-zinc-700"
+              className="bg-zinc-800 border-zinc-700 text-white placeholder:text-zinc-500"
             />
           </div>
 
           <div className="space-y-2">
-            <label className="text-sm font-medium">Artist</label>
+            <label className="text-sm font-medium text-white">Artist</label>
             <Input
               value={newSong.artist}
               onChange={(e) => setNewSong({ ...newSong, artist: e.target.value })}
-              className="bg-zinc-800 border-zinc-700"
+              className="bg-zinc-800 border-zinc-700 text-white placeholder:text-zinc-500"
             />
           </div>
 
           <div className="space-y-2">
-            <label className="text-sm font-medium">Duration (seconds)</label>
+            <label className="text-sm font-medium text-white">Duration (seconds)</label>
             <Input
               type="number"
               min="0"
               value={newSong.duration}
               onChange={(e) => setNewSong({ ...newSong, duration: e.target.value || "0" })}
-              className="bg-zinc-800 border-zinc-700"
+              className="bg-zinc-800 border-zinc-700 text-white placeholder:text-zinc-500"
             />
           </div>
 
           <div className="space-y-2">
-            <label className="text-sm font-medium">Album (Optional)</label>
+            <label className="text-sm font-medium text-white">Album (Optional)</label>
             <Select
               value={newSong.album}
               onValueChange={(value) => setNewSong({ ...newSong, album: value })}
             >
-              <SelectTrigger className="bg-zinc-800 border-zinc-700">
+              <SelectTrigger className="bg-zinc-800 border-zinc-700 text-white">
                 <SelectValue placeholder="Select album" />
               </SelectTrigger>
               <SelectContent className="bg-zinc-800 border-zinc-700">
-                <SelectItem value="none">No Album (Single)</SelectItem>
+                <SelectItem value="none" className="text-white hover:bg-zinc-700">No Album (Single)</SelectItem>
                 {albums.map((album) => (
-                  <SelectItem key={album._id} value={album._id}>
+                  <SelectItem key={album._id} value={album._id} className="text-white hover:bg-zinc-700">
                     {album.title}
                   </SelectItem>
                 ))}
@@ -202,10 +206,19 @@ const AddSongDialog = () => {
         </div>
 
         <DialogFooter>
-          <Button variant="outline" onClick={() => setSongDialogOpen(false)} disabled={isLoading}>
+          <Button 
+            variant="outline" 
+            onClick={() => setSongDialogOpen(false)} 
+            disabled={isLoading}
+            className="bg-zinc-800 text-white border-zinc-700 hover:bg-zinc-700"
+          >
             Cancel
           </Button>
-          <Button onClick={handleSubmit} disabled={isLoading}>
+          <Button 
+            onClick={handleSubmit} 
+            disabled={isLoading}
+            className="bg-emerald-500 hover:bg-emerald-600 text-black"
+          >
             {isLoading ? "Uploading..." : "Add Song"}
           </Button>
         </DialogFooter>

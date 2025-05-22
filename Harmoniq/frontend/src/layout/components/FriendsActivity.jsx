@@ -13,6 +13,8 @@ const FriendsActivity = () => {
 		if (user) fetchUsers();
 	}, [fetchUsers, user]);
 
+
+
 	return (
 		<div className='h-full bg-zinc-900 rounded-lg flex flex-col'>
 			<div className='p-4 flex justify-between items-center border-b border-zinc-800'>

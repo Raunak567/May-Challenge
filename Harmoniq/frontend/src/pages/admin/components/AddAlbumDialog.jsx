@@ -76,10 +76,10 @@ const AddAlbumDialog = () => {
 					Add Album
 				</Button>
 			</DialogTrigger>
-			<DialogContent className='bg-zinc-900 border-zinc-700'>
+			<DialogContent className='bg-black border-zinc-800 text-white max-h-[80vh] overflow-auto'>
 				<DialogHeader>
-					<DialogTitle>Add New Album</DialogTitle>
-					<DialogDescription>Add a new album to your collection</DialogDescription>
+					<DialogTitle className="text-white">Add New Album</DialogTitle>
+					<DialogDescription className="text-zinc-400">Add a new album to your collection</DialogDescription>
 				</DialogHeader>
 				<div className='space-y-4 py-4'>
 					<input
@@ -90,46 +90,55 @@ const AddAlbumDialog = () => {
 						className='hidden'
 					/>
 					<div
-						className='flex items-center justify-center p-6 border-2 border-dashed border-zinc-700 rounded-lg cursor-pointer'
+						className='flex items-center justify-center p-6 border-2 border-dashed border-zinc-700 rounded-lg cursor-pointer hover:border-zinc-600'
 						onClick={() => fileInputRef.current?.click()}
 					>
 						<div className='text-center'>
-							<div className='p-3 bg-zinc-800 rounded-full inline-block mb-2'>
-								<Upload className='h-6 w-6 text-zinc-400' />
-							</div>
-							<div className='text-sm text-zinc-400 mb-2'>
-								{imageFile ? imageFile.name : "Upload album artwork"}
-							</div>
-							<Button variant='outline' size='sm' className='text-xs'>
-								Choose File
-							</Button>
+							{imageFile ? (
+								<div className="space-y-2">
+									<div className="text-sm text-emerald-500">Image selected:</div>
+									<div className="text-xs text-zinc-400">{imageFile.name.slice(0, 20)}</div>
+								</div>
+							) : (
+								<>
+									<div className='p-3 bg-zinc-800 rounded-full inline-block mb-2'>
+										<Upload className='h-6 w-6 text-zinc-400' />
+									</div>
+									<div className='text-sm text-zinc-400 mb-2'>
+										Upload album artwork
+									</div>
+									<Button variant='outline' size='sm' className='text-xs bg-zinc-800 text-white border-zinc-700 hover:bg-zinc-700'>
+										Choose File
+									</Button>
+								</>
+							)}
 						</div>
 					</div>
 					<div className='space-y-2'>
-						<label className='text-sm font-medium'>Album Title</label>
+						<label className='text-sm font-medium text-white'>Album Title</label>
 						<Input
 							value={newAlbum.title}
 							onChange={(e) => setNewAlbum({ ...newAlbum, title: e.target.value })}
-							className='bg-zinc-800 border-zinc-700'
+							className='bg-zinc-800 border-zinc-700 text-white placeholder:text-zinc-500'
 							placeholder='Enter album title'
 						/>
 					</div>
 					<div className='space-y-2'>
-						<label className='text-sm font-medium'>Artist</label>
+						<label className='text-sm font-medium text-white'>Artist</label>
 						<Input
 							value={newAlbum.artist}
 							onChange={(e) => setNewAlbum({ ...newAlbum, artist: e.target.value })}
-							className='bg-zinc-800 border-zinc-700'
+							className='bg-zinc-800 border-zinc-700 text-white placeholder:text-zinc-500'
 							placeholder='Enter artist name'
 						/>
 					</div>
 					<div className='space-y-2'>
-						<label className='text-sm font-medium'>Release Year</label>
+						<label className='text-sm font-medium text-white'>Release Year</label>
 						<Input
 							type='number'
 							value={newAlbum.releaseYear}
 							onChange={(e) => setNewAlbum({ ...newAlbum, releaseYear: parseInt(e.target.value) })}
-							className='bg-zinc-800 border-zinc-700'
+							className='bg-zinc-800 border-zinc-700 text-white placeholder:text-zinc-500'
 							placeholder='Enter release year'
 							min={1900}
 							max={new Date().getFullYear()}
@@ -137,12 +146,17 @@ const AddAlbumDialog = () => {
 					</div>
 				</div>
 				<DialogFooter>
-					<Button variant='outline' onClick={() => setAlbumDialogOpen(false)} disabled={isLoading}>
+					<Button 
+						variant='outline' 
+						onClick={() => setAlbumDialogOpen(false)} 
+						disabled={isLoading}
+						className="bg-zinc-800 text-white border-zinc-700 hover:bg-zinc-700"
+					>
 						Cancel
 					</Button>
 					<Button
 						onClick={handleSubmit}
-						className='bg-violet-500 hover:bg-violet-600'
+						className='bg-emerald-500 hover:bg-emerald-600 text-black'
 						disabled={isLoading || !imageFile || !newAlbum.title || !newAlbum.artist}
 					>
 						{isLoading ? "Creating..." : "Add Album"}
