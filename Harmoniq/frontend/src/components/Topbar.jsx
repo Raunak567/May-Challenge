@@ -1,14 +1,10 @@
 import React, { useState } from "react";
 import { SignedIn, SignedOut, UserButton } from "@clerk/clerk-react";
-import { LayoutDashboardIcon } from "lucide-react";
-import { Link } from "react-router-dom";
 import SignInOAuthButtons from "./SignInOAuthButtons";
-import { useAuthStore } from "@/stores/useAuthStore";
-import { cn } from "@/lib/utils";
-import { buttonVariants } from "./ui/button";
+import SearchSongs from "./SearchSongs";
 
 const Topbar = () => {
-  const { isAdmin } = useAuthStore();
+  
   const [dropdown, setDropdown] = useState({
     notifications: false,
     messages: false,
@@ -38,14 +34,7 @@ const Topbar = () => {
   return (
     <div className="flex items-center justify-between p-4 sticky top-0 bg-zinc-900/75 backdrop-blur-md z-10 border-b border-gray-800">
       {/* Search bar */}
-      <div className="flex items-center bg-gray-800 bg-opacity-50 rounded-full px-4 py-2 w-96">
-        <i className="fas fa-search text-gray-400 mr-2"></i>
-        <input
-          type="text"
-          placeholder="Search songs, artists, or tags..."
-          className="bg-transparent border-none focus:outline-none text-white w-full"
-        />
-      </div>
+      <SearchSongs />
 
       {/* Right side */}
       <div className="flex items-center gap-4 relative">
@@ -53,9 +42,9 @@ const Topbar = () => {
         <SignedIn>
           <div className="flex items-center gap-4 relative">
             {/* Notifications */}
-            <div className="relative">
+            <div className="relative ">
               <button
-                className="action-btn"
+                className="action-btn "
                 title="Notifications"
                 onClick={() => toggleDropdown("notifications")}
               >

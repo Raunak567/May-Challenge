@@ -127,6 +127,70 @@ const seedDatabase = async () => {
 				plays: Math.floor(Math.random() * 5000),
 				duration: 17, // 0:17
 			},
+			{
+				title: "Bad Computer - Can't Heal You [NCS Release]",
+				artist: "No-Copyright-Songs",
+				imageUrl: "./albums/5.png",
+				audioUrl: "/songs/Bad Computer - Can't Heal You [NCS Release].mp3",
+				plays: Math.floor(Math.random() * 5000),
+				duration: 202, 
+			},
+			{
+				title: "Conro - Let Go [NCS Release]",
+				artist: "No-Copyright-Songs",
+				imageUrl: "./albums/5.png",
+				audioUrl: "/songs/Conro - Let Go [NCS Release].mp3",
+				plays: Math.floor(Math.random() * 5000),
+				duration: 181, 
+			},
+			{
+				title: "Irokz - Goodbye My Love [NCS Release]",
+				artist: "No-Copyright-Songs",
+				imageUrl: "./albums/5.png",
+				audioUrl: "/songs/Irokz - Goodbye My Love [NCS Release].mp3",
+				plays: Math.floor(Math.random() * 5000),
+				duration: 198, 
+			},
+			{
+				title: "LXNGVX - Royalty Funk [NCS Release]",
+				artist: "No-Copyright-Songs",
+				imageUrl: "./albums/5.png",
+				audioUrl: "/songs/LXNGVX - Royalty Funk [NCS Release].mp3",
+				plays: Math.floor(Math.random() * 5000),
+				duration: 177, 
+			},
+			{
+				title: "Maestro Chives, Egzod, Neoni - Royalty [NCS Release]",
+				artist: "No-Copyright-Songs",
+				imageUrl: "./albums/5.png",
+				audioUrl: "/songs/Maestro Chives, Egzod, Neoni - Royalty [NCS Release].mp3",
+				plays: Math.floor(Math.random() * 5000),
+				duration: 223, 
+			},
+			{
+				title: "Naym - Signs [NCS Release]",
+				artist: "No-Copyright-Songs",
+				imageUrl: "./albums/5.png",
+				audioUrl: "/songs/Naym - Signs [NCS Release].mp3",
+				plays: Math.floor(Math.random() * 5000),
+				duration: 208, 
+			},
+			{
+				title: "Warriyo, Laura Brehm - Mortals (feat. Laura Brehm) [NCS Release]",
+				artist: "No-Copyright-Songs",
+				imageUrl: "./albums/5.png",
+				audioUrl: "/songs/Warriyo, Laura Brehm - Mortals (feat. Laura Brehm) [NCS Release].mp3",
+				plays: Math.floor(Math.random() * 5000),
+				duration: 228, 
+			},
+			{
+				title: "Warriyo, LXNGVX - Mortals Funk Remix [NCS Release] (1)",
+				artist: "No-Copyright-Songs",
+				imageUrl: "./albums/5.png",
+				audioUrl: "/songs/Warriyo, LXNGVX - Mortals Funk Remix [NCS Release] (1).mp3",
+				plays: Math.floor(Math.random() * 5000),
+				duration: 206, 
+			},
 		]);
 
 		// Create albums with references to song IDs
@@ -158,6 +222,13 @@ const seedDatabase = async () => {
 				imageUrl: "/albums/4.jpg",
 				releaseYear: 2024,
 				songs: createdSongs.slice(11, 14).map((song) => song._id),
+			},
+			{
+				title: "NCS",
+				artist: "No-Copyright-Songs",
+				imageUrl: "/albums/5.png",
+				releaseYear: 2022,
+				songs: createdSongs.slice(14, 22).map((song) => song._id),
 			},
 		];
 

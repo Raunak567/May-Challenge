@@ -22,3 +22,8 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Custom folders to ignore
+frontend/public/albums/
+cover_images/
+songs/

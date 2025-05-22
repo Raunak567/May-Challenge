@@ -80,7 +80,7 @@ const songs = [
 		artist: "Arctic Pulse",
 		imageUrl: "/cover-images/11.jpg",
 		audioUrl: "/songs/11.mp3",
-		duration: 29, // 0:29
+		duration: 29, 
 	},
 	{
 		title: "Purple Sunset",
@@ -129,7 +129,63 @@ const songs = [
 		artist: "Jazz Cats",
 		imageUrl: "/cover-images/18.jpg",
 		audioUrl: "/songs/18.mp3",
-		duration: 29, // 0:29
+		duration: 29, 
+	},
+	{
+		title: "Bad Computer - Can't Heal You [NCS Release]",
+		artist: "No-Copyright-Songs",
+		imageUrl: "./albums/5.png",
+		audioUrl: "/songs/Bad Computer - Can't Heal You [NCS Release].mp3",
+		duration: 202, 
+	},
+	{
+		title: "Conro - Let Go [NCS Release]",
+		artist: "No-Copyright-Songs",
+		imageUrl: "./albums/5.png",
+		audioUrl: "/songs/Conro - Let Go [NCS Release].mp3",
+		duration: 181, 
+	},
+	{
+		title: "Irokz - Goodbye My Love [NCS Release]",
+		artist: "No-Copyright-Songs",
+		imageUrl: "./albums/5.png",
+		audioUrl: "/songs/Irokz - Goodbye My Love [NCS Release].mp3",
+		duration: 198, 
+	},
+	{
+		title: "LXNGVX - Royalty Funk [NCS Release]",
+		artist: "No-Copyright-Songs",
+		imageUrl: "./albums/5.png",
+		audioUrl: "/songs/LXNGVX - Royalty Funk [NCS Release].mp3",
+		duration: 177, 
+	},
+	{
+		title: "Maestro Chives, Egzod, Neoni - Royalty [NCS Release]",
+		artist: "No-Copyright-Songs",
+		imageUrl: "./albums/5.png",
+		audioUrl: "/songs/Maestro Chives, Egzod, Neoni - Royalty [NCS Release].mp3",
+		duration: 223, 
+	},
+	{
+		title: "Naym - Signs [NCS Release]",
+		artist: "No-Copyright-Songs",
+		imageUrl: "./albums/5.png",
+		audioUrl: "/songs/Naym - Signs [NCS Release].mp3",
+		duration: 208, 
+	},
+	{
+		title: "Warriyo, Laura Brehm - Mortals (feat. Laura Brehm) [NCS Release]",
+		artist: "No-Copyright-Songs",
+		imageUrl: "./albums/5.png",
+		audioUrl: "/songs/Warriyo, Laura Brehm - Mortals (feat. Laura Brehm) [NCS Release].mp3",
+		duration: 228, 
+	},
+	{
+		title: "Warriyo, LXNGVX - Mortals Funk Remix [NCS Release] (1)",
+		artist: "No-Copyright-Songs",
+		imageUrl: "./albums/5.png",
+		audioUrl: "/songs/Warriyo, LXNGVX - Mortals Funk Remix [NCS Release] (1).mp3",
+		duration: 206, 
 	},
 ];
 
