@@ -47,13 +47,13 @@ cd May-Challenge
 
 ### 🖥️ Terminal 1 (Frontend)
 ```
-cd .\May-Challenge\Harmoniq\frontend\
+cd .\Harmoniq\frontend\
 npm install
 npm run dev
 ```
 ### 🖥️ Terminal 2 (Backend)
 ```
-cd .\May-Challenge\Harmoniq\backend\
+cd .\Harmoniq\backend\
 npm install
 npm run dev
 ```
