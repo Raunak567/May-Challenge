@@ -1,77 +1,84 @@
-# 🎧 Harmoniq — AI-Powered Music App
+# 🎧 Harmoniq — AI-Powered Social Music App
 
-Welcome to **Hamoniq**, an intelligent music application that blends music with the power of AI. This project is focused on enhancing user experience through natural language search, smart recommendations, and AI-generated content like song lyrics.
+Welcome to **Harmoniq**, an intelligent and collaborative music platform that combines the magic of music with the power of AI. Whether you're vibing solo or syncing up with friends, Harmoniq makes your listening experience smarter, more social, and tailored to your emotions and preferences.
 
-## 🚀 Features
+---
 
-✅ Natural Language Song Search using Cohere Embed & Rerank  
-✅ AI-Generated Lyrics using GPT-4 / Mistral  
-✅ Emotion-Based Music Tagging with Hugging Face  
-✅ AI DJ / Music Chat Assistant with GPT-4 Function Calling  
-✅ React Frontend with dynamic mood & genre selection
+## 🚀 Key Features
 
-> Some features are still under development due to time constraints — stay tuned for updates!
+✅ **Natural Language Song Search** — Ask for songs like _“chill jazz with rainy vibes”_  
+✅ **AI-Generated Lyrics** — Create lyrics from scratch using GPT-4 or Mistral  
+✅ **Mood-Based Music Tagging** — Songs automatically classified by emotional tone  
+✅ **Live Chat While Listening** — Chat and react to music live with your group  
+✅ **Friend System** — Add friends, invite them to join sessions, and sing together  
 
 ---
 
 ## 🧠 Tech Stack
 
-- **Frontend**: React (JSX), Vite
-- **Backend**: Express.js + OpenAI API
+- **Frontend**: React + Vite
+- **Backend**: Express.js + WebSockets + OpenAI API
 - **AI Models**:
-  - Cohere Embed & Rerank (Search & Recommendations)
-  - GPT-4 / Mistral 7B (Lyrics Generation)
-  - Hugging Face (Emotion Classification)
+  - [Cohere](https://cohere.com/) for Embedding & Rerank (Search)
+  - [OpenAI GPT-4](https://openai.com) / [Mistral 7B](https://mistral.ai) for Lyrics & Chat
+  - Hugging Face for Emotion Classification
 - **Database**: MongoDB
+- **Real-Time**: WebSockets for chat & synchronized playback
 
 ---
 
 ## 💡 Example Use Cases
 
-- 🔍 "Find me relaxing indie songs with happy vibes"
-- ✍️ Auto-generate lyrics for your own melodies
-- 🎙️ AI DJ assistant to recommend your mood-based playlist
-- 🧠 Tag music with emotions for better searchability
+- 🔍 _“Find me relaxing indie songs with happy vibes”_  
+- ✍️ Generate custom lyrics for your own melodies  
+- 🧑‍🤝‍🧑 Start a room with friends and listen together in sync  
+- 💬 Chat while you listen, react to songs, and share music moments live  
+- 🧠 Tag your favorite songs by emotion or theme for smarter discovery  
 
 ---
 
 ## 📦 Installation & Running the App
-1. Clone the repository
-```
+
+Clone the repository:
+
+```bash
 git clone https://github.com/Raunak567/May-Challenge.git
 cd May-Challenge
 ```
-2. Install dependencies and run servers
 
-## You need to use two terminals:
-
-### 🖥️ Terminal 1 (Frontend)
-```
-cd .\Harmoniq\frontend\
+### 🖥️ Terminal 1: Frontend
+```bash
+cd ./Harmoniq/frontend/
 npm install
 npm run dev
 ```
-### 🖥️ Terminal 2 (Backend)
-```
-cd .\Harmoniq\backend\
+
+### 🖥️ Terminal 2: Backend
+```bash
+cd ./Harmoniq/backend/
 npm install
 npm run dev
 ```
-⚠️ Make sure both frontend and backend are running for the app to function properly.
+
+⚠️ Both frontend and backend must be running for full functionality.
+
+---
 
 ## 📌 Under Development
-### Some features that are still in progress:
 
-* Full playlist recommendation logic
+- 🎧 Collaborative playlist editing  
+- 🧠 Music tagging via a fine-tuned BERT model  
+- 🛠️ Admin panel for metadata & content control  
+- 🗃️ Persistent lyrics & user preferences storage
 
-* Music tagging via fine-tuned BERT model
-
-* Admin panel for managing music metadata
-
-* Persistent lyrics storage in DB
+---
 
 ## 🤝 Contributing
-* Pull requests are welcome! If you want to contribute to AI logic or UI/UX improvements, feel free to fork the repo and open a PR.
+
+Pull requests are welcome! If you have ideas to improve the AI, UI/UX, or real-time sync logic, feel free to fork the repo and submit a PR.
+
+---
 
 ## 📬 Contact
-* Made by Raunak — always exploring ideas at the intersection of music and AI.
+
+Made by **Raunak** — passionate about building experiences where **music meets AI** and friends vibe together.  
