@@ -7,7 +7,7 @@ import cors from "cors";
 import fs from "fs";
 import { createServer } from "http";
 import cron from "node-cron";
-import lyricsRouter from "./routes/lyrics.js";
+import lyricsRouter from './routes/lyrics.js';
 
 import { initializeSocket } from "./lib/socket.js";
 
@@ -73,7 +73,7 @@ app.use("/api/songs", songRoutes);
 app.use("/api/albums", albumRoutes);
 app.use("/api/stats", statRoutes);
 app.use("/api/search", searchRouter);
-app.use("/api", lyricsRouter);
+app.use('/api', lyricsRouter);
 
 
 if (process.env.NODE_ENV === "production") {

@@ -10,7 +10,6 @@ import { useMusicStore } from "@/stores/useMusicStore";
 
 const AdminPage = () => {
 	const { isAdmin, isLoading } = useAuthStore();
-
 	const { fetchAlbums, fetchSongs, fetchStats } = useMusicStore();
 
 	useEffect(() => {
@@ -19,17 +18,40 @@ const AdminPage = () => {
 		fetchStats();
 	}, [fetchAlbums, fetchSongs, fetchStats]);
 
-	if (!isAdmin && !isLoading) return <div>Unauthorized</div>;
+	// Only show unauthorized message for non-admin users when trying to access albums
+	if (!isAdmin && !isLoading) {
+		return (
+			<div className='min-h-screen bg-gradient-to-b from-zinc-900 via-zinc-900 to-black text-zinc-100 p-8'>
+				<Header />
+				<Tabs defaultValue='songs' className='space-y-6'>
+					<TabsList className='p-1 bg-zinc-800/50'>
+						<TabsTrigger value='songs' className='data-[state=active]:bg-zinc-700'>
+							<Music className='mr-2 size-4' />
+							Songs
+						</TabsTrigger>
+						<TabsTrigger value='albums' className='data-[state=active]:bg-zinc-700' disabled>
+							<Album className='mr-2 size-4' />
+							Albums
+						</TabsTrigger>
+					</TabsList>
+
+					<TabsContent value='songs'>
+						<SongsTabContent />
+					</TabsContent>
+					<TabsContent value='albums'>
+						<div className="text-center py-8 text-zinc-400">
+							You need admin permissions to manage albums
+						</div>
+					</TabsContent>
+				</Tabs>
+			</div>
+		);
+	}
 
 	return (
-		<div
-			className='min-h-screen bg-gradient-to-b from-zinc-900 via-zinc-900
-   to-black text-zinc-100 p-8'
-		>
+		<div className='min-h-screen bg-gradient-to-b from-zinc-900 via-zinc-900 to-black text-zinc-100 p-8'>
 			<Header />
-
 			<DashboardStats />
-
 			<Tabs defaultValue='songs' className='space-y-6'>
 				<TabsList className='p-1 bg-zinc-800/50'>
 					<TabsTrigger value='songs' className='data-[state=active]:bg-zinc-700'>
@@ -52,4 +74,5 @@ const AdminPage = () => {
 		</div>
 	);
 };
+
 export default AdminPage;

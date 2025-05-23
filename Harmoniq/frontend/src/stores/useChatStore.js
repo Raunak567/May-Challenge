@@ -39,7 +39,9 @@ export const useChatStore = create((set, get) => ({
 			socket.auth = { userId };
 			socket.connect();
 
-			socket.emit("user_connected", userId);
+			socket.on("connect", () => {
+				socket.emit("user_connected", userId);
+			});
 
 			socket.on("users_online", (users) => {
 				set({ onlineUsers: new Set(users) });
@@ -64,15 +66,14 @@ export const useChatStore = create((set, get) => ({
 			});
 
 			socket.on("receive_message", (message) => {
-				set((state) => ({
-					messages: [...state.messages, message],
-				}));
-			});
-
-			socket.on("message_sent", (message) => {
-				set((state) => ({
-					messages: [...state.messages, message],
-				}));
+				set((state) => {
+					// Check if message already exists to prevent duplicates
+					const messageExists = state.messages.some(m => m._id === message._id);
+					if (messageExists) return state;
+					return {
+						messages: [...state.messages, message],
+					};
+				});
 			});
 
 			socket.on("activity_updated", ({ userId, activity }) => {
@@ -81,6 +82,10 @@ export const useChatStore = create((set, get) => ({
 					newActivities.set(userId, activity);
 					return { userActivities: newActivities };
 				});
+			});
+
+			socket.on("connect_error", (error) => {
+				console.error("Socket connection error:", error);
 			});
 
 			set({ isConnected: true });

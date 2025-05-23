@@ -3,6 +3,7 @@ import { Slider } from "@/components/ui/slider";
 import { usePlayerStore } from "@/stores/usePlayerStore";
 import { Laptop2, ListMusic, Mic2, Pause, Play, Repeat, Shuffle, SkipBack, SkipForward, Volume1 } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
+import { Link } from "react-router-dom";
 
 const formatTime = (seconds) => {
 	const minutes = Math.floor(seconds / 60);
@@ -136,12 +137,12 @@ export const PlaybackControls = () => {
 				</div>
 				{/* volume controls */}
 				<div className='hidden sm:flex items-center gap-4 min-w-[180px] w-[30%] justify-end'>
-					<Button size='icon' variant='ghost' className='hover:text-white text-zinc-400'>
+					<Link to="/karaoke" className="p-2 hover:text-white text-zinc-400 rounded-full hover:bg-zinc-800">
 						<Mic2 className='h-4 w-4' />
-					</Button>
-					<Button size='icon' variant='ghost' className='hover:text-white text-zinc-400'>
+					</Link>
+					<Link to="/library" className="p-2 hover:text-white text-zinc-400 rounded-full hover:bg-zinc-800">
 						<ListMusic className='h-4 w-4' />
-					</Button>
+					</Link>
 					<Button size='icon' variant='ghost' className='hover:text-white text-zinc-400'>
 						<Laptop2 className='h-4 w-4' />
 					</Button>

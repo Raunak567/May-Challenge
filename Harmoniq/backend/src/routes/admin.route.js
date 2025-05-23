@@ -4,12 +4,14 @@ import { protectRoute, requireAdmin } from "../middleware/auth.middleware.js";
 
 const router = Router();
 
+// Songs routes - only require authentication
+router.post("/songs", protectRoute, createSong);
+router.delete("/songs/:id", protectRoute, deleteSong);
+
+// Admin routes - require both authentication and admin status
 router.use(protectRoute, requireAdmin);
 
 router.get("/check", checkAdmin);
-
-router.post("/songs", createSong);
-router.delete("/songs/:id", deleteSong);
 
 router.post("/albums", createAlbum);
 router.delete("/albums/:id", deleteAlbum);

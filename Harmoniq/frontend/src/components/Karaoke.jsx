@@ -1,6 +1,8 @@
 import React, { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
+import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import AudioPlayer from "../layout/components/AudioPlayer";
 import {
   faMicrophoneAlt,
   faMicrophoneAltSlash,
@@ -15,9 +17,13 @@ import {
   faPaperPlane,
   faUser,
   faCopy,
-  faListOl
+  faListOl,
+  faTimes,
+  faArrowUp,
+  faArrowDown
 } from '@fortawesome/free-solid-svg-icons';
 import GenerateLyrics from './GenerateLyrics';
+import { PlaybackControls } from '../layout/components/PlaybackControls';
 
 const KaraokeRoom = () => {
   const [micMuted, setMicMuted] = useState(false);
@@ -30,6 +36,11 @@ const KaraokeRoom = () => {
   const [currentTime, setCurrentTime] = useState(0);
   const [queue, setQueue] = useState([]);
   const audioRef = useRef(new Audio());
+  const [messages, setMessages] = useState([
+    { id: 1, user: 'Sarah', message: 'This line hits hard!', timestamp: '2:30 PM' },
+    { id: 2, user: 'You', message: '🔥🔥', timestamp: '2:31 PM' }
+  ]);
+  const chatEndRef = useRef(null);
 
   const handleSearch = async () => {
     if (!searchQuery) return;
@@ -94,12 +105,33 @@ const KaraokeRoom = () => {
     navigator.clipboard.writeText('ABC123');
   };
 
+  const scrollToBottom = () => {
+    chatEndRef.current?.scrollIntoView({ behavior: "smooth" });
+  };
+
+  useEffect(() => {
+    scrollToBottom();
+  }, [messages]);
+
+  const handleSendMessage = () => {
+    if (message.trim()) {
+      const newMessage = {
+        id: messages.length + 1,
+        user: 'You',
+        message: message.trim(),
+        timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
+      };
+      setMessages([...messages, newMessage]);
+      setMessage('');
+    }
+  };
+
   return (
     <div className="min-h-screen bg-[#121212]">
       <div className="flex h-screen overflow-hidden">
         {/* Sidebar */}
         <div className="w-96 bg-black bg-opacity-20 border-r border-gray-800 flex flex-col">
-          <div className="p-6">
+          <div className="p-9">
             <h1 className="text-2xl font-bold text-white flex items-center">
               <FontAwesomeIcon icon={faMicrophoneAlt} className="mr-2 text-purple-400" />
               Karaoke Room
@@ -107,9 +139,9 @@ const KaraokeRoom = () => {
           </div>
           
           <nav className="flex-1 px-4 space-y-3 overflow-y-auto">
-            <a href="/" className="flex items-center px-4 py-3 rounded-lg bg-purple-900 bg-opacity-30 text-white hover:bg-opacity-40">
+            <Link to="/" className="flex items-center px-4 py-3 rounded-lg bg-purple-900 bg-opacity-30 text-white hover:bg-opacity-40">
               <FontAwesomeIcon icon={faArrowLeft} className="mr-3" /> Back to Lobby
-            </a>
+            </Link>
 
             {/* Now Playing Card */}
             {currentSong && (
@@ -128,51 +160,95 @@ const KaraokeRoom = () => {
                       <div className="mx-2 flex-1 bg-gray-700 rounded-full h-1">
                         <div 
                           className="bg-purple-500 h-1 rounded-full" 
-                          style={{ width: `${(currentTime / currentSong.duration) * 100}%` }} 
+                          style={{ width: `${(currentSong?.duration ? (currentTime / currentSong.duration) * 100 : 0)}%` }} 
                         />
                       </div>
                       <span>{currentSong.duration}</span>
                     </div>
                   </div>
                 </div>
-
-                <div className="flex justify-between mt-2">
-                  <button className="p-2 rounded-full bg-gray-800 hover:bg-gray-700 text-white">
-                    <FontAwesomeIcon icon={faStepBackward} />
-                  </button>
-                  <button 
-                    onClick={togglePlay}
-                    className="p-2 rounded-full bg-purple-600 hover:bg-purple-700 text-white"
-                  >
-                    <FontAwesomeIcon icon={isPlaying ? faPause : faPlay} />
-                  </button>
-                  <button className="p-2 rounded-full bg-gray-800 hover:bg-gray-700 text-white">
-                    <FontAwesomeIcon icon={faStepForward} />
-                  </button>
-                </div>
               </div>
             )}
 
             {/* Queue Section */}
             <div className="bg-[#141414] bg-opacity-70 backdrop-blur-md border border-white/5 p-4 rounded-lg">
-              <h3 className="font-semibold text-white mb-2 flex items-center">
-                <FontAwesomeIcon icon={faListOl} className="mr-2 text-purple-400" />
-                Up Next
-              </h3>
-              <div className="space-y-2">
-                {queue.map((song, index) => (
-                  <div key={index} className="flex items-center p-2 hover:bg-gray-800 rounded-lg">
-                    <img 
-                      src={song.imageUrl}
-                      alt={song.title}
-                      className="w-10 h-10 rounded mr-3 object-cover"
-                    />
-                    <div>
-                      <p className="text-sm font-medium text-white">{song.title}</p>
-                      <p className="text-xs text-gray-400">{song.artist}</p>
-                    </div>
+              <div className="flex items-center justify-between mb-3">
+                <h3 className="font-semibold text-white flex items-center">
+                  <FontAwesomeIcon icon={faListOl} className="mr-2 text-purple-400" />
+                  Up Next ({queue.length})
+                </h3>
+                {queue.length > 0 && (
+                  <button 
+                    onClick={() => setQueue([])}
+                    className="text-sm text-gray-400 hover:text-white"
+                  >
+                    Clear Queue
+                  </button>
+                )}
+              </div>
+              <div className="space-y-2 max-h-[300px] overflow-y-auto">
+                {queue.length === 0 ? (
+                  <div className="text-center py-4 text-gray-400">
+                    <p>No songs in queue</p>
+                    <p className="text-sm">Search and add songs to get started</p>
                   </div>
-                ))}
+                ) : (
+                  queue.map((song, index) => (
+                    <div 
+                      key={index} 
+                      className="flex items-center p-2 hover:bg-gray-800 rounded-lg group"
+                    >
+                      <div className="w-8 h-8 flex items-center justify-center text-gray-400">
+                        {index + 1}
+                      </div>
+                      <img 
+                        src={song.imageUrl}
+                        alt={song.title}
+                        className="w-10 h-10 rounded mr-3 object-cover"
+                      />
+                      <div className="flex-1 min-w-0">
+                        <p className="text-sm font-medium text-white truncate">{song.title}</p>
+                        <p className="text-xs text-gray-400 truncate">{song.artist}</p>
+                      </div>
+                      <div className="flex items-center gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+                        <button 
+                          onClick={() => {
+                            const newQueue = [...queue];
+                            newQueue.splice(index, 1);
+                            setQueue(newQueue);
+                          }}
+                          className="p-1 text-gray-400 hover:text-white"
+                        >
+                          <FontAwesomeIcon icon={faTimes} />
+                        </button>
+                        {index > 0 && (
+                          <button 
+                            onClick={() => {
+                              const newQueue = [...queue];
+                              [newQueue[index], newQueue[index - 1]] = [newQueue[index - 1], newQueue[index]];
+                              setQueue(newQueue);
+                            }}
+                            className="p-1 text-gray-400 hover:text-white"
+                          >
+                            <FontAwesomeIcon icon={faArrowUp} />
+                          </button>
+                        )}
+                        {index < queue.length - 1 && (
+                          <button 
+                            onClick={() => {
+                              const newQueue = [...queue];
+                              [newQueue[index], newQueue[index + 1]] = [newQueue[index + 1], newQueue[index]];
+                              setQueue(newQueue);
+                            }}
+                            className="p-1 text-gray-400 hover:text-white"
+                          >
+                            <FontAwesomeIcon icon={faArrowDown} />
+                          </button>
+                        )}
+                      </div>
+                    </div>
+                  ))
+                )}
               </div>
             </div>
           </nav>
@@ -257,29 +333,35 @@ const KaraokeRoom = () => {
               <div className="bg-[#141414] bg-opacity-70 backdrop-blur-md border border-white/5 rounded-xl p-4">
                 <h2 className="text-lg font-semibold text-white mb-3">Live Chat</h2>
                 <div className="overflow-y-auto h-48 mb-3 space-y-2">
-                  {[
-                    { user: 'Sarah', message: 'This line hits hard!' },
-                    { user: 'You', message: '🔥🔥' }
-                  ].map((chat, index) => (
-                    <div key={index} className="flex items-start space-x-3">
+                  {messages.map((chat) => (
+                    <div key={chat.id} className="flex items-start space-x-3">
                       <div className="w-8 h-8 bg-gray-700 rounded-full flex items-center justify-center">
                         <FontAwesomeIcon icon={faUser} className="text-gray-300 text-sm" />
                       </div>
-                      <div className="text-white text-sm">
-                        {chat.user}: {chat.message}
+                      <div className="flex-1">
+                        <div className="flex items-center gap-2">
+                          <span className="text-white font-medium">{chat.user}</span>
+                          <span className="text-xs text-gray-400">{chat.timestamp}</span>
+                        </div>
+                        <p className="text-white text-sm mt-1">{chat.message}</p>
                       </div>
                     </div>
                   ))}
+                  <div ref={chatEndRef} />
                 </div>
                 <div className="flex mt-3">
                   <input
                     type="text"
                     value={message}
                     onChange={(e) => setMessage(e.target.value)}
+                    onKeyPress={(e) => e.key === 'Enter' && handleSendMessage()}
                     placeholder="Send a message..."
-                    className="flex-1 bg-gray-800 text-white px-3 py-2 rounded-l-lg focus:outline-none"
+                    className="flex-1 px-4 py-2 bg-gray-800 text-white rounded-l-full focus:outline-none"
                   />
-                  <button className="bg-purple-600 hover:bg-purple-700 text-white px-4 py-2 rounded-r-lg">
+                  <button 
+                    onClick={handleSendMessage}
+                    className="px-4 py-2 bg-purple-600 hover:bg-purple-700 text-white rounded-r-full"
+                  >
                     <FontAwesomeIcon icon={faPaperPlane} />
                   </button>
                 </div>
@@ -354,10 +436,13 @@ const KaraokeRoom = () => {
                 </button>
                 <span className="text-gray-400">Public</span>
               </div>
-            </div>
+              </div>
           </aside>
         </div>
       </div>
+      <AudioPlayer />
+      <PlaybackControls/>
+
     </div>
   );
 };

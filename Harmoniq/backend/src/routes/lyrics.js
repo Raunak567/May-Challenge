@@ -1,43 +1,35 @@
-import express from "express";
-import { OpenAI } from "openai";
-import dotenv from "dotenv";
-dotenv.config();
+import express from 'express';
+import axios from 'axios';
 
 const router = express.Router();
-const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
 
-router.post("/generate-lyrics-for-song", async (req, res) => {
-    const { title, artist, mood, genre } = req.body;
-  
-    if (!title || !artist || !genre) {
-      return res.status(400).json({ error: "Missing song metadata" });
-    }
-  
-    const prompt = `Generate ${mood || ""} ${genre} song lyrics for a song titled "${title}" by ${artist}.`;
-  
-    try {
-      const response = await openai.chat.completions.create({
-        model: "gpt-4",
-        messages: [
-          {
-            role: "system",
-            content: "You are a professional songwriter AI assistant.",
-          },
-          {
-            role: "user",
-            content: prompt,
-          },
-        ],
-        temperature: 0.9,
-        max_tokens: 300,
-      });
-  
-      const lyrics = response.choices[0].message.content;
-      res.json({ lyrics });
-    } catch (err) {
-      console.error("Lyrics generation failed:", err);
-      res.status(500).json({ error: "Lyrics generation failed" });
-    }
-  });
-  
-  export default router;
+router.post('/lyrics', async (req, res) => {
+  const { title, artist } = req.body;
+
+  const prompt = `Write a short song inspired by the song "${title}" by ${artist}. Keep it lyrical, creative, and emotionally engaging.`;
+
+  try {
+    const response = await axios.post(
+      'https://api.openai.com/v1/chat/completions',
+      {
+        model: 'gpt-4',
+        messages: [{ role: 'user', content: prompt }],
+        temperature: 0.8,
+        max_tokens: 250
+      },
+      {
+        headers: {
+          Authorization: `Bearer ${process.env.OPENAI_API_KEY}`
+        }
+      }
+    );
+
+    const lyrics = response.data.choices[0].message.content.trim();
+    res.json({ lyrics });
+  } catch (err) {
+    console.error(err.response?.data || err.message);
+    res.status(500).json({ lyrics: 'Error generating lyrics' });
+  }
+});
+
+export default router;

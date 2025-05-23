@@ -14,21 +14,30 @@ export const initializeSocket = (server) => {
 
 	io.on("connection", (socket) => {
 		socket.on("user_connected", (userId) => {
+			// Update user socket mapping
 			userSockets.set(userId, socket.id);
-			userActivities.set(userId, "Idle");
+			
+			// Only set to Idle if no activity exists
+			if (!userActivities.has(userId)) {
+				userActivities.set(userId, "Idle");
+			}
 
 			// broadcast to all connected sockets that this user just logged in
 			io.emit("user_connected", userId);
 
+			// Send current online users to the newly connected user
 			socket.emit("users_online", Array.from(userSockets.keys()));
 
+			// Broadcast current activities to all users
 			io.emit("activities", Array.from(userActivities.entries()));
 		});
 
 		socket.on("update_activity", ({ userId, activity }) => {
 			console.log("activity updated", userId, activity);
-			userActivities.set(userId, activity);
-			io.emit("activity_updated", { userId, activity });
+			if (userSockets.has(userId)) {  // Only update if user is still connected
+				userActivities.set(userId, activity);
+				io.emit("activity_updated", { userId, activity });
+			}
 		});
 
 		socket.on("send_message", async (data) => {
@@ -47,7 +56,8 @@ export const initializeSocket = (server) => {
 					io.to(receiverSocketId).emit("receive_message", message);
 				}
 
-				socket.emit("message_sent", message);
+				// Send back to sender to confirm message was sent
+				socket.emit("receive_message", message);
 			} catch (error) {
 				console.error("Message error:", error);
 				socket.emit("message_error", error.message);
