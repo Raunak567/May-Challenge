@@ -2,6 +2,12 @@
 
 Welcome to **Harmoniq**, an intelligent and collaborative music platform that combines the magic of music with the power of AI. Whether you're vibing solo or syncing up with friends, Harmoniq makes your listening experience smarter, more social, and tailored to your emotions and preferences.
 
+🎥 Watch Demo Video
+Experience Harmoniq in action:
+📺 [Click here to watch the full demo](https://drive.google.com/file/d/1ZEqgAd4fQYLQbGVsaHbukZathJ6pXSTp/view?usp=sharing)
+
+See how Harmoniq blends AI, music, and social features to create a next-gen listening experience.
+
 ---
 
 ## 🚀 Key Features
